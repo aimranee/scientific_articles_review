@@ -1,15 +1,15 @@
-import { useTheme } from "next-themes"
-import { type FC } from "react"
-import SunIcon from "../../public/sun-icon.svg"
-import MoonIcon from "../../public/moon-icon.svg"
-import IconWrapper from "./IconWrapper"
+import { useTheme } from "next-themes";
+import { type FC } from "react";
+import SunIcon from "../../public/sun-icon.svg";
+import MoonIcon from "../../public/moon-icon.svg";
+import IconWrapper from "./IconWrapper";
 
 interface ThemeButtonProps {
-  className?: string
+  className?: string;
 }
 
 const ThemeButton: FC<ThemeButtonProps> = ({ className }) => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <button
@@ -23,7 +23,7 @@ const ThemeButton: FC<ThemeButtonProps> = ({ className }) => {
         alt="Toggle dark mode"
       />
     </button>
-  )
-}
+  );
+};
 
-export default ThemeButton
+export default ThemeButton;

@@ -30,5 +30,13 @@
     "react-highlight-words": "^0.20.0",
     "react-loader-spinner": "^5.3.4",
     "react-string-replace": "^1.1.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
+    "@types/react": "^18.2.17",
+    "@types/react-highlight-words": "^0.16.4",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7"
   }
 }

@@ -12,9 +12,7 @@ const RepositoryButton = () => {
         href="https://github.com/GabrielCarames/grammar-checker"
         className={`font-semibold ${
           router.pathname === "/grammar-checker" && "text-pink-1 dark:text-pink-400"
-        } ${router.pathname === "/text-summarizer" && "text-green-1 dark:text-green-400"} ${
-          router.pathname === "/translator" && "text-orange-500 dark:text-orange-400"
-        } `}
+        } ${router.pathname === "/text-summarizer" && "text-green-1 dark:text-green-400"} `}
         target="_blank"
       >
         <span className="flex justify-center items-center gap-2">

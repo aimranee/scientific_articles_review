@@ -2,12 +2,11 @@ import { useBoundStore } from "@/zustand/useBoundStore"
 import { useEffect } from "react"
 
 export const useCleaner = () => {
-  const { clearCorrections, clearSummary, clearValue, clearTranslation } = useBoundStore()
+  const { clearCorrections, clearSummary, clearValue } = useBoundStore()
 
   useEffect(() => {
     clearCorrections()
     clearSummary()
     clearValue()
-    clearTranslation()
   }, [])
 }

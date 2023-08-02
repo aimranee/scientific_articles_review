@@ -18,9 +18,7 @@ const ModalContent: FC<ModalContentProps> = ({ content }) => {
             <h3
               className={`text-base lg:text-lg font-semibold ${
                 router.pathname === "/grammar-checker" && "text-pink-1 dark:text-pink-400"
-              } ${router.pathname === "/text-summarizer" && "text-green-1 dark:text-green-400"} ${
-                router.pathname === "/translator" && "text-orange-500 dark:text-orange-400"
-              }`}
+              } ${router.pathname === "/text-summarizer" && "text-green-1 dark:text-green-400"}`}
             >
               {key}
             </h3>
