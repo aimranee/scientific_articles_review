@@ -13,5 +13,5 @@ export enum HeaderDescription {
 export enum ResponseProperties {
   CORRECTIONS = "corrections",
   SUMMARY = "summary",
-  VOCABULARY = "Vocabulary",
+  VOCABULARY = "vocabulary",
 }
