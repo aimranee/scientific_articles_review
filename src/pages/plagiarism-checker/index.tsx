@@ -1,13 +1,13 @@
-import GrammarCheckerInfo from "@/../public/GrammarCheckerInfo.json"
-import GrammarCheckerTextareaWrapper from "@/components/GrammarChecker/GrammarCheckerTextareaWrapper"
+import GrammarCheckerCheckerInfo from "@/../public/GrammarCheckerInfo.json"
+import PlagiarismCheckerTextareaWrapper from "@/components/PlagiarismChecker/PlagiarismCheckerTextareaWrapper"
 import TextareaSection from "@/components/TextareaSection"
-import Aside from "@/components/GrammarChecker/Aside"
+import Aside from "@/components/PlagiarismChecker/Aside"
 import Navbar from "@/components/Navbar"
 import { HeaderDescription, HeaderTitle } from "@/enums.d"
 import { useCleaner } from "@/hooks/useCleaner"
 import { type FC } from "react"
 
-const GrammarChecker: FC = () => {
+const PlagiarismChecker: FC = () => {
   useCleaner()
 
   return (
@@ -21,9 +21,9 @@ const GrammarChecker: FC = () => {
               title={HeaderTitle.PLAGIARIM_CHECKER}
               description={HeaderDescription.PLAGIARIM_CHECKER}
               className="bg-pink-1"
-              content={GrammarCheckerInfo}
+              content={GrammarCheckerCheckerInfo}
             />
-            <GrammarCheckerTextareaWrapper />
+            <PlagiarismCheckerTextareaWrapper />
           </TextareaSection>
         </main>
       </div>
@@ -32,4 +32,4 @@ const GrammarChecker: FC = () => {
   )
 }
 
-export default GrammarChecker
+export default PlagiarismChecker

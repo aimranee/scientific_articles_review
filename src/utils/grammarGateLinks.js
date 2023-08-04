@@ -10,6 +10,13 @@ const links = [
     borderColor: "!border-b-pink-1",
   },
   {
+    name: "Plagiarism Checker",
+    href: "/plagiarism-checker",
+    icon: GrammarCheckerIcon,
+    backgroundColor: "bg-pink-1",
+    borderColor: "!border-b-pink-1",
+  },
+  {
     name: "Text Summarizer",
     href: "/text-summarizer",
     icon: TextSummarizerIcon,
