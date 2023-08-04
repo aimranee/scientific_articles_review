@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import {
   createSystemMessage,
   createUserMessage,
-} from "@/prompts/vocabularyCheckerPrompt";
+} from "@/prompts/plagiarimCheckerPrompt";
 import { useBoundStore } from "@/zustand/useBoundStore";
 import { useChatGPT } from "./useChatGPT";
 import { ResponseProperties } from "@/enums.d";
 
-export const useVocabularyChecker = () => {
+export const usePlagiarismChecker = () => {
   const { addCorrection, setValue } = useBoundStore();
   const [textToCorrect, setTextToCorrect] = useState("");
   const { addChatGPTMessage, loading } = useChatGPT({
