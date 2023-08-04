@@ -1,14 +1,14 @@
-import VocabularyCheckerInfo from "@/../public/GrammarCheckerInfo.json"
-import VocabularyCheckerTextareaWrapper from "@/components/GrammarChecker/GrammarCheckerTextareaWrapper"
-import TextareaSection from "@/components/TextareaSection"
-import Aside from "@/components/GrammarChecker/Aside"
-import Navbar from "@/components/Navbar"
-import { HeaderDescription, HeaderTitle } from "@/enums.d"
-import { useCleaner } from "@/hooks/useCleaner"
-import { type FC } from "react"
+import VocabularyCheckerInfo from "@/../public/GrammarCheckerInfo.json";
+import VocabularyCheckerTextareaWrapper from "@/components/VocabularyChecker/VocabularyCheckerTextareaWrapper";
+import TextareaSection from "@/components/TextareaSection";
+import Aside from "@/components/GrammarChecker/Aside";
+import Navbar from "@/components/Navbar";
+import { HeaderDescription, HeaderTitle } from "@/enums.d";
+import { useCleaner } from "@/hooks/useCleaner";
+import { type FC } from "react";
 
 const VocabularyChecker: FC = () => {
-  useCleaner()
+  useCleaner();
 
   return (
     <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
@@ -30,6 +30,6 @@ const VocabularyChecker: FC = () => {
       <Aside />
     </div>
   );
-}
+};
 
 export default VocabularyChecker;
