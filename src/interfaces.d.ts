@@ -32,6 +32,14 @@ export interface MakeRequestProps {
   ): Promise<any>
 }
 
+
+export interface MakeRequestPropsTrunitin {
+  (
+    url: string,
+    burp0_data: Turnitin_dataProps,
+    headers: AxiosHeaders["Content-Type, Authorization"]
+  )
+}
 export interface ChatGPTJSON_dataProps {
   model: string
   messages: ChatGPTMessageProps[]
