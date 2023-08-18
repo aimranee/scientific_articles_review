@@ -19,12 +19,15 @@
       "description": "Our vocabulary analyzes your text to detect definition for definitions in your text, making it easy to distill the key points of any document or article.",
       "link": "/vocabulary-checker"
     },
-{
-  "title": "Plagiarism Checker",
-  "description": "Our plagiarism checker scans your text to detect potential instances of plagiarism and provides detailed information about potential sources or references that match content in your text, ensuring the originality and authenticity of your content.",
-  "link": "/plagiarism-checker"
-}
-    
-    
+    {
+      "title": "Plagiarism Checker",
+      "description": "Our plagiarism checker scans your text to detect potential instances of plagiarism and provides detailed information about potential sources or references that match content in your text, ensuring the originality and authenticity of your content.",
+      "link": "/plagiarism-checker"
+    },
+    {
+      "title": "Import PDF",
+      "description": "Our plagiarism checker scans your text to detect potential instances of plagiarism and provides detailed information about potential sources or references that match content in your text, ensuring the originality and authenticity of your content.",
+      "link": "/pdf_import"
+    }
   ]
 }
