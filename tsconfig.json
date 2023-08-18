@@ -21,7 +21,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx", "src/pages/pdf_import/index.tsx",
   ],
   "exclude": ["node_modules"]
 }
