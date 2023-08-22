@@ -7,7 +7,7 @@ import FileUpload from "./fileUpload";
 
 const Pdf_Upload: FC<FileUploadProps> = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [res, setRes] = useState<any>(null);
+  const [res, setRes] = useState<string>("");
 
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -52,14 +52,14 @@ const Pdf_Upload: FC<FileUploadProps> = () => {
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 A better workflow
               </h2>
-              {res && (
+              {/* {res && (
                 <div>
                   <h2>Parsed XML Data</h2>
                   <p className="mt-6 text-gray-700 max-w-xl text-base leading-7 lg:max-w-lg">
-                    {res + "dddddddddddddddddd"}
+                    {res}
                   </p>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

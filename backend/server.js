@@ -34,12 +34,12 @@ app.post("/upload", upload.single("file-upload"), async (req, res) => {
       }
     );
 
-    console.log("Response from external API:", response.data);
+    // console.log("Response from external API:", response.data);
 
     fs.unlinkSync(uploadedFilePath); // Remove the temporary uploaded file
 
     return res.status(200).json({
-      result: true,
+      result: response.data,
       msg: "File uploaded and processed",
     });
   } catch (error) {

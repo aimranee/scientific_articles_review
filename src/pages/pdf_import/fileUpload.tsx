@@ -2,10 +2,7 @@ import { FileUploadProps } from "@/interfaces";
 import { ChangeEvent, useState } from "react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
-// import { parseString } from "xml2js";
 
-// import fs from "fs";
-// import path from "path";
 import { type FC } from "react";
 
 const FileUpload: FC<FileUploadProps> = ({ setFile, setRes }) => {
@@ -23,7 +20,7 @@ const FileUpload: FC<FileUploadProps> = ({ setFile, setRes }) => {
         "http://localhost:8080/upload",
         formData
       );
-      console.log("11111111111" + response.data);
+      console.log("11111111111" + response.data.result);
       setRes(response.data);
     } catch (error) {
       console.error("Error uploading the file:", error);
