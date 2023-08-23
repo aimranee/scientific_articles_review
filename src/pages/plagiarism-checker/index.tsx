@@ -2,6 +2,7 @@ import GrammarCheckerCheckerInfo from "@/../public/GrammarCheckerInfo.json"
 import PlagiarismCheckerTextareaWrapper from "@/components/PlagiarismChecker/PlagiarismCheckerTextareaWrapper"
 import TextareaSection from "@/components/TextareaSection"
 import Aside from "@/components/PlagiarismChecker/Aside"
+import makePlagiarismCheck from "@/services/askToTurnitin"
 import Navbar from "@/components/Navbar"
 import { HeaderDescription, HeaderTitle } from "@/enums.d"
 import { useCleaner } from "@/hooks/useCleaner"
@@ -24,6 +25,7 @@ const PlagiarismChecker: FC = () => {
               content={GrammarCheckerCheckerInfo}
             />
             <PlagiarismCheckerTextareaWrapper />
+         
           </TextareaSection>
         </main>
       </div>
