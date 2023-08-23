@@ -2,14 +2,13 @@ import { FileUploadProps } from "@/interfaces";
 import { ChangeEvent, useState } from "react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
-// import { parseString } from "xml2js";
+import { parseString } from "xml2js";
 
-// import fs from "fs";
-// import path from "path";
 import { type FC } from "react";
 
 const FileUpload: FC<FileUploadProps> = ({ setFile, setRes }) => {
   const [uploading, setUploading] = useState(false);
+  const [parsedData, setParsedData] = useState<any>(null);
 
   const uploadHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -23,8 +22,15 @@ const FileUpload: FC<FileUploadProps> = ({ setFile, setRes }) => {
         "http://localhost:8080/upload",
         formData
       );
-      console.log("11111111111" + response.data);
-      setRes(response.data);
+      // console.log("11111111111" + response.data.result);
+      parseString(response.data.result, (err, parsedResult) => {
+        if (!err) {
+          setRes(parsedResult);
+          setParsedData(parsedResult); // Save the parsed data in state
+        } else {
+          console.error("Error parsing XML:", err);
+        }
+      });
     } catch (error) {
       console.error("Error uploading the file:", error);
     }
