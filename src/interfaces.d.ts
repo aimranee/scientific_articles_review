@@ -86,3 +86,13 @@ interface FileUploadProps {
 interface FileItemProps {
   file: File | null;
 }
+
+interface Section {
+  title: string;
+  // Other properties
+}
+
+interface FileResProps {
+  res: string;
+  setRes: Dispatch<SetStateAction<any>>;
+}

@@ -1,13 +1,14 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { type FC } from "react";
 
-import { FileUploadProps, UploadedFile } from "@/interfaces";
+import { FileUploadProps, Section, UploadedFile } from "@/interfaces";
 import FileItem from "./FileItem";
 import FileUpload from "./fileUpload";
 
 const Pdf_Upload: FC<FileUploadProps> = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [res, setRes] = useState<string>("");
+  const [res, setRes] = useState<any>(null);
+  const [title, setTitle] = useState("");
 
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -45,22 +46,35 @@ const Pdf_Upload: FC<FileUploadProps> = () => {
       <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
-            <div className="lg:max-w-lg">
-              <p className="text-base font-semibold leading-7 text-indigo-600">
-                Deploy faster
-              </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                A better workflow
-              </h2>
-              {/* {res && (
+            {res && (
+              <div className="lg:max-w-lg">
+                <p className="text-base font-semibold leading-7 text-indigo-600">
+                  {
+                    res.article.front[0]["article-meta"][0]["title-group"][0][
+                      "article-title"
+                    ][0]
+                  }
+                </p>
+                {/* {res.article.body[0].sec.map((e: Section) => { */}
+                <h2
+                  className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+                  // key={e.title[0]}
+                >
+                  {res.article.body[0].sec[0].title[0]}
+                </h2>
+                {/* })} */}
                 <div>
-                  <h2>Parsed XML Data</h2>
+                  {/* <h2>Parsed XML Data</h2> */}
                   <p className="mt-6 text-gray-700 max-w-xl text-base leading-7 lg:max-w-lg">
-                    {res}
+                    {/* {
+                      res.article.front[0]["article-meta"][0]["title-group"][0][
+                        "article-title"
+                      ][0]
+                    } */}
                   </p>
                 </div>
-              )} */}
-            </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
