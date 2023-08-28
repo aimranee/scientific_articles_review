@@ -22,6 +22,7 @@ const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("file-upload"), async (req, res) => {
   const uploadedFilePath = req.file.path;
+  // console.log(uploadedFilePath);
 
   try {
     const response = await axios.post(

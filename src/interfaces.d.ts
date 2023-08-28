@@ -28,13 +28,12 @@ export interface MakeRequestProps {
   ): Promise<any>;
 }
 
-
 export interface MakeRequestPropsTrunitin {
   (
     url: string,
     burp0_data: Turnitin_dataProps,
     headers: AxiosHeaders["Content-Type, Authorization"]
-  )
+  );
 }
 export interface ChatGPTJSON_dataProps {
   model: string;
@@ -87,7 +86,6 @@ interface UploadedFile extends File {
 }
 
 interface FileUploadProps {
-  setFile: Dispatch<SetStateAction<File | null>>;
   setRes: Dispatch<SetStateAction<any>>;
 }
 
