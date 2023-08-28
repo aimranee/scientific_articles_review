@@ -1,32 +1,33 @@
-import { type FC, type ChangeEvent } from "react"
-import HighlightedText from "../HighlightedText"
-import { useBoundStore } from "@/zustand/useBoundStore"
-import Highlighter from "react-highlight-words"
-import ExampleTextButton from "../ExampleTextButton"
-import { CorrectionsProps } from "@/interfaces"
-import Textarea from "../Textarea"
-import isDesktopView from "@/utils/isDesktopView"
+import { type FC, type ChangeEvent } from "react";
+import HighlightedText from "../HighlightedText";
+import { useBoundStore } from "@/zustand/useBoundStore";
+import Highlighter from "react-highlight-words";
+import ExampleTextButton from "../ExampleTextButton";
+import { ChecksProps } from "@/interfaces";
+import Textarea from "../Textarea";
+import isDesktopView from "@/utils/isDesktopView";
+import { useState } from "react";
 
-interface GrammarCheckerTextareaProps {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  setTextToCorrect: (text: string) => void
+interface PlagiarismCheckerTextareaProps {
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  setTextToCheck: (text: string) => void;
 }
 
-const getSearchWords = (corrections: CorrectionsProps) => {
+const getSearchWords = (checks: ChecksProps) => {
   return [
-    `\\b(${corrections?.correctionsList?.map(correction => correction.result[0]).join("|")})\\b`,
-    "gi"
-  ]
-}
-
+    `\\b(${checks?.checksList?.map((check) => check.result[0]).join("|")})\\b`,
+    "gi",
+  ];
+};
 const EXAMPLE_TEXT =
-  "Me and my friend goes to the park last weekend, we plays on the swings, seesaw, and slides, and we have so much fun together."
+  "Le dragon est une créature légendaire représentée comme une sorte de gigantesque reptile, ailes déployées et pattes armées de griffes.";
 
-const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
+const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
   onChange,
-  setTextToCorrect
+  setTextToCheck,
 }) => {
-  const { corrections, value } = useBoundStore()
+  const { checks, value } = useBoundStore();
+  const [textValue, setTextValue] = useState("");
   return (
     <div className="relative w-full px-5">
       <div
@@ -34,7 +35,7 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
         spellCheck={false}
       >
         <Highlighter
-          searchWords={getSearchWords(corrections)}
+          searchWords={getSearchWords(checks)}
           autoEscape={false}
           textToHighlight={value}
           highlightTag={HighlightedText}
@@ -51,12 +52,12 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
       {value.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
-          additionalSetState={setTextToCorrect}
+          additionalSetState={setTextToCheck}
           className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-500"
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default GrammarCheckerTextarea
+export default PlagiarismCheckerTextarea;

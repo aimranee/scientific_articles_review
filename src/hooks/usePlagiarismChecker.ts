@@ -9,7 +9,7 @@ import { ResponseProperties } from "@/enums.d";
 
 export const usePlagiarismChecker = () => {
   const { addCorrection, setValue } = useBoundStore();
-  const [textToCorrect, setTextToCorrect] = useState("");
+  const [textToCorrect, setTextToCheck] = useState("");
   const { addChatGPTMessage, loading } = useChatGPT({
     initialPrompt: createSystemMessage(),
     customProperty: ResponseProperties.CORRECTIONS,
@@ -28,9 +28,9 @@ export const usePlagiarismChecker = () => {
   }, [textToCorrect]);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextToCorrect(e.target.value);
+    setTextToCheck(e.target.value);
     setValue(e.target.value);
   };
 
-  return { onChange, loading, setTextToCorrect };
+  return { onChange, loading, setTextToCheck };
 };
