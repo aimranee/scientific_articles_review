@@ -1,8 +1,10 @@
-import homeText from "../utils/homeText.json"
-import links from "../utils/grammarGateLinks"
-import { Item } from "../components/GrammarGateItem"
-import IconWrapper from "@/components/IconWrapper"
-import ThemeButton from "@/components/ThemeButton"
+import homeText from "../utils/homeText.json";
+import links from "../utils/grammarGateLinks";
+import { Item } from "../components/GrammarGateItem";
+import IconWrapper from "@/components/IconWrapper";
+import ThemeButton from "@/components/ThemeButton";
+import FileUpload from "@/components/PdfExtraction/fileUpload";
+import { useState, useEffect, ChangeEvent } from "react";
 
 export default function Home() {
   return (
@@ -22,6 +24,7 @@ export default function Home() {
               {homeText?.secundaryDescription}
             </span>
           </p>
+          <FileUpload />
         </header>
         <ul className="h-full flex flex-wrap justify-center gap-x-20 gap-y-5 font-bold">
           {links?.map((link, index) => (
@@ -29,8 +32,13 @@ export default function Home() {
               className={`w-full flex-none md:max-w-none sm:w-max h-auto max-h-none flex flex-col gap-1 border-[2px] dark:border-gray-700 rounded-md ${link?.borderColor} hover:bg-gray-3`}
               key={link?.name}
             >
-              <Item.ItemLink href={link?.href} className="flex flex-col items-center gap-2 p-5">
-                <Item.ImageWrapper className={`p-4 sm:!p-5 ${link?.backgroundColor}`}>
+              <Item.ItemLink
+                href={link?.href}
+                className="flex flex-col items-center gap-2 p-5"
+              >
+                <Item.ImageWrapper
+                  className={`p-4 sm:!p-5 ${link?.backgroundColor}`}
+                >
                   <IconWrapper
                     icon={<link.icon className="w-5 h-5 sm:!w-10 sm:!h-10" />}
                     className={`w-5 h-5 sm:!w-10 sm:!h-10`}
@@ -46,5 +54,5 @@ export default function Home() {
         </ul>
       </main>
     </div>
-  )
+  );
 }

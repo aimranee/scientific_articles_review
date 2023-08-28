@@ -10,7 +10,7 @@ const links = [
     borderColor: "!border-b-pink-1",
   },
   {
-    name: "Plagiarism Checker",
+    name: "Plagiarism",
     href: "/plagiarism-checker",
     icon: GrammarCheckerIcon,
     backgroundColor: "bg-pink-1",
@@ -24,8 +24,15 @@ const links = [
     borderColor: "!border-b-green-500",
   },
   {
-    name: "Vocabulary Checker",
+    name: "Vocabulary",
     href: "/vocabulary-checker",
+    icon: TextSummarizerIcon,
+    backgroundColor: "bg-green-500",
+    borderColor: "!border-b-green-500",
+  },
+  {
+    name: "File Upload",
+    href: "/pdf-upload",
     icon: TextSummarizerIcon,
     backgroundColor: "bg-green-500",
     borderColor: "!border-b-green-500",
