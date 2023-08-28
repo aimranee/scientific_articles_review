@@ -13,7 +13,20 @@ export interface CorrectionProps {
   result: string[];
 }
 
+export interface CheckProps {
+  id: string;
+  type: string;
+  explanation: string;
+  result: string[];
+}
 export interface CorrectionsListProps extends Array<CorrectionProps> {}
+
+export interface ChecksListProps extends Array<CheckProps> {}
+
+export interface ChecksProps {
+  checksList: ChecksListProps;
+  checkedText: string;
+}
 
 export interface CorrectionsProps {
   correctionsList: CorrectionsListProps;
@@ -31,10 +44,56 @@ export interface MakeRequestProps {
 export interface MakeRequestPropsTrunitin {
   (
     url: string,
-    burp0_data: Turnitin_dataProps,
+    burp0_data: {
+      is_free: string; //boolen;
+      plagchecker_locale: string;
+      product_paper_type: string;
+      title: string;
+      text: string;
+    },
     headers: AxiosHeaders["Content-Type, Authorization"]
   );
 }
+
+export interface Burp0Headers {
+  "User-Agent": string;
+  Accept: string;
+  "Accept-Language": string;
+  "Accept-Encoding": string;
+  Referer: string;
+  "Content-Type": string;
+  "X-Requested-With": string;
+  Origin: string;
+  Dnt: string;
+  "Sec-Fetch-Dest": string;
+  "Sec-Fetch-Mode": string;
+  "Sec-Fetch-Site": string;
+  Pragma: string;
+  "Cache-Control": string;
+  Te: string;
+  Connection: string;
+}
+
+export const burp0_headers: Burp0Headers = {
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0",
+  Accept: "*/*",
+  "Accept-Language": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+  "Accept-Encoding": "gzip, deflate",
+  Referer: "https://papersowl.com/free-plagiarism-checker",
+  "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  "X-Requested-With": "XMLHttpRequest",
+  Origin: "https://papersowl.com",
+  Dnt: "1",
+  "Sec-Fetch-Dest": "empty",
+  "Sec-Fetch-Mode": "no-cors",
+  "Sec-Fetch-Site": "same-origin",
+  Pragma: "no-cache",
+  "Cache-Control": "no-cache",
+  Te: "trailers",
+  Connection: "close",
+};
+
 export interface ChatGPTJSON_dataProps {
   model: string;
   messages: ChatGPTMessageProps[];
@@ -59,6 +118,8 @@ export interface ChildrenProps {
 }
 
 export type AddCorrectionProps = (newCorrections: CorrectionsProps) => void;
+//plagiat section
+export type AddCheckProps = (newListCkeck: ChecksProps) => void;
 
 export type SetSummaryProps = (newSummary: string) => void;
 
@@ -86,19 +147,10 @@ interface UploadedFile extends File {
 }
 
 interface FileUploadProps {
+  setFile: Dispatch<SetStateAction<File | null>>;
   setRes: Dispatch<SetStateAction<any>>;
 }
 
 interface FileItemProps {
   file: File | null;
-}
-
-interface Section {
-  title: string;
-  // Other properties
-}
-
-interface FileResProps {
-  res: string;
-  setRes: Dispatch<SetStateAction<any>>;
 }
