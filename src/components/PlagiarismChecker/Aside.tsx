@@ -1,52 +1,28 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+interface AsideProps {
+  textareaContent: string;
+  result: any; // Update the type based on your API response structure
+  isLoading: boolean;
+  error: string | null;
+}
 
-const text_to_check: string =
-  "hello my friend how are u whell i m gonna talk today about innation did you ever heard of this Le dragon est une créature légendaire représentée comme une sorte de gigantesque reptile, ailes déployées et pattes armées de griffes. the idea is we gonna try to make some diffrence in IT wold by adding tolls gonna help peple in the live for exmeple ....";
-
-const Aside = (): JSX.Element => {
-  const [result, setResult] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios
-        .post(
-          "http://localhost:8080/plagiarism-check",
-          text_to_check,
-
-          {
-            headers: {
-              "Content-Type": "text/plain", // Set the content type to plain text
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response.data);
-          console.log("data dial aimrane " + fetchData);
-          const fetchedResult = response.data.result;
-
-          setResult(fetchedResult);
-          // Handle the response data as needed
-        });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+const Aside: React.FC<AsideProps> = ({
+  textareaContent,
+  result,
+  isLoading,
+  error,
+}) => {
   return (
     <aside className="w-full lg:w-96 md:max-h-screen bg-white dark:bg-gray-1 text-gray-1 dark:text-white p-5 shadow-lg">
       <h2 className="text-base lg:text-lg mb-10">Plagiarism Check Results</h2>
       {isLoading ? (
         <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
       ) : result ? (
         <div>
+          {" "}
           <table className="border-collapse border border-gray-500 w-full">
             <thead>
               <tr className="bg-gray-200">
@@ -104,7 +80,7 @@ const Aside = (): JSX.Element => {
           </table>
         </div>
       ) : (
-        <p>Error loading data.</p>
+        <p>Enter text to check for plagiarism.</p>
       )}
     </aside>
   );
