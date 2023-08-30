@@ -154,3 +154,6 @@ interface FileUploadProps {
 interface FileItemProps {
   file: File | null;
 }
+interface TextCheckPropos {
+  textToCheck: string;
+}
