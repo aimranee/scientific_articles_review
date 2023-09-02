@@ -6,15 +6,21 @@ import { type FC } from "react";
 import Link from "next/link";
 import { parseString } from "xml2js";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import { ChangeEvent } from "react";
+import { useRouter } from "next/router";
+import { ResProps } from "@/interfaces";
 
 const FileUpload: FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploading, setUploading] = useState(false);
   const { Dragger } = Upload;
   const [res, setRes] = useState<any>(null);
-
-  const handleUpload = async () => {
+  const router = useRouter();
+  const handleUpload = () => {
+    // const handleUpload = () => {
+    // router.push({
+    //   pathname: "/pdf-upload",
+    //   query: { data: JSON.stringify(res) },
+    // });
     // const formData = new FormData();
     // const selectedFile = fileList[0];
     // formData.append("file-upload", selectedFile, selectedFile.name);
@@ -94,11 +100,17 @@ const FileUpload: FC = () => {
           "http://localhost:8080/upload",
           formData
         );
-        console.log("11111111111" + response.data.result);
+        // console.log("11111111111" + response.data.result);
         parseString(response.data.result, (err, parsedResult) => {
           if (!err) {
             message.success("upload successfully.");
             setRes(parsedResult);
+            console.log(
+              "ttttt : " +
+                res.article.front["article-meta"]["title-group"][
+                  "article-title"
+                ]
+            );
           } else {
             console.error("Error parsing XML:", err);
           }
@@ -134,7 +146,18 @@ const FileUpload: FC = () => {
         loading={uploading}
         style={{ marginTop: 16 }}
       >
-        {uploading ? "Uploading" : <Link href="/pdf-upload">Start Upload</Link>}
+        {uploading ? (
+          "Uploading"
+        ) : (
+          <Link
+            href={{
+              pathname: "/pdf-upload",
+              // query: { res: JSON.stringify(res) },
+            }}
+          >
+            Start Upload
+          </Link>
+        )}
       </Button>
     </>
   );

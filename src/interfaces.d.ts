@@ -102,3 +102,8 @@ interface FileResProps {
   res: string;
   setRes: Dispatch<SetStateAction<any>>;
 }
+
+interface ResProps {
+  res: string;
+  setRes: Dispatch<SetStateAction<string>>;
+}
