@@ -1,4 +1,4 @@
-import GrammarCheckerCheckerInfo from "@/../public/GrammarCheckerInfo.json";
+import PlagiarismCheckerInfo from "@/../public/PlagiarismCheckerInfo.json";
 import PlagiarismCheckerTextareaWrapper from "@/components/PlagiarismChecker/PlagiarismCheckerTextareaWrapper";
 import TextareaSection from "@/components/TextareaSection";
 import Aside from "@/components/PlagiarismChecker/Aside";
@@ -41,6 +41,7 @@ const PlagiarismChecker: FC = () => {
 
       if (response.data && response.data.result) {
         setResult(response.data.result);
+        console.log("response " + response);
       } else {
         setError("API response is missing expected data structure.");
       }
@@ -62,20 +63,20 @@ const PlagiarismChecker: FC = () => {
               title={HeaderTitle.PLAGIARIM_CHECKER}
               description={HeaderDescription.PLAGIARIM_CHECKER}
               className="bg-pink-1"
-              content={GrammarCheckerCheckerInfo}
+              content={PlagiarismCheckerInfo}
             />
             <PlagiarismCheckerTextareaWrapper
               setTextareaContent={setTextareaContent}
             />
           </TextareaSection>
         </main>
+        <Aside
+          textareaContent={textareaContent}
+          result={result}
+          isLoading={isLoading}
+          error={error}
+        />
       </div>
-      <Aside
-        textareaContent={textareaContent}
-        result={result}
-        isLoading={isLoading}
-        error={error}
-      />
     </div>
   );
 };

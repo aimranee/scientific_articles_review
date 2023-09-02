@@ -102,6 +102,14 @@ app.post("/plagiarism-check", async (req, res) => {
     console.log("\n[!] Turnitin index : " + (100 - parseFloat(result.percent)));
     console.log("\n[!] Matches : " + result.matches);
 
+    console.log("\n[!] Matches:");
+    result["matches"].forEach((element) => {
+      console.log("\n[!] Matches : " + JSON.stringify(element));
+    });
+    console.log("\n Matches : wtfffffffffffffff");
+
+    console.log("\n[!] Matches : " + result["matches"]);
+
     return res.status(200).json({
       result: result,
       msg: "File uploaded and processed",

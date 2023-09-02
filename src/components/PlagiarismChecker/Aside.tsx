@@ -1,13 +1,6 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-interface AsideProps {
-  textareaContent: string;
-  result: any; // Update the type based on your API response structure
-  isLoading: boolean;
-  error: string | null;
-}
-
-const Aside: React.FC<AsideProps> = ({
+import { extractHighlightedTextByWords } from "@/utils/highlithText";
+import { PlagiarismProps } from "@/interfaces";
+const Aside: React.FC<PlagiarismProps> = ({
   textareaContent,
   result,
   isLoading,
@@ -22,7 +15,35 @@ const Aside: React.FC<AsideProps> = ({
         <p>Error: {error}</p>
       ) : result ? (
         <div>
-          {" "}
+          <div>
+            {/* <p>Result Percent: {100 - parseFloat(result.percent)}</p>
+            <p>Words Count: {result["words_count"]}</p> */}
+            <div>
+              <p>Matches:</p>
+              <ul>
+                {result.matches.map((match: any, index: number) => (
+                  <li key={index}>
+                    <p>
+                      <span className="highlight">
+                        Highlighted Text:
+                        {match.highlight.map((high: any, index: number) => (
+                          <span key={index}>
+                            {`"${extractHighlightedTextByWords(
+                              textareaContent,
+                              high
+                            )}"`}
+                          </span>
+                        ))}
+                      </span>
+                    </p>
+                    {/* <p>Percent: {match.percent}</p>
+                    <p>URL: {match.url}</p> */}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <table className="border-collapse border border-gray-500 w-full">
             <thead>
               <tr className="bg-gray-200">
@@ -62,7 +83,14 @@ const Aside: React.FC<AsideProps> = ({
                       {result.matches.map((match: any, index: number) => (
                         <tr key={index}>
                           <td className="border border-gray-500 px-4 py-2">
-                            {match.highlight}
+                            {match.highlight.map((high: any, index: number) => (
+                              <span key={index}>
+                                {`"${extractHighlightedTextByWords(
+                                  textareaContent,
+                                  high
+                                )}"`}
+                              </span>
+                            ))}
                           </td>
                           <td className="border border-gray-500 px-4 py-2">
                             {match.percent}

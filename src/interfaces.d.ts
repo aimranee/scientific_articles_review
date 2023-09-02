@@ -119,6 +119,13 @@ export interface ChildrenProps {
 
 export type AddCorrectionProps = (newCorrections: CorrectionsProps) => void;
 //plagiat section
+interface PlagiarismProps {
+  textareaContent: string;
+  result: any; // Update the type based on your API response structure
+  isLoading: boolean;
+  error: string | null;
+}
+
 export type AddCheckProps = (newListCkeck: ChecksProps) => void;
 
 export type SetSummaryProps = (newSummary: string) => void;
@@ -137,7 +144,9 @@ export interface ModalContentProps {
     Limitations: string[];
     "Common Mistakes"?: string[];
     "Common Features"?: string[];
+    "Common Signs of Plagiarism"?: string[];
     Tips: string[];
+    "Tips to Avoid Plagiarism"?: string[];
     Disclaimers: string[];
   };
 }

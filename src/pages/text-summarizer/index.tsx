@@ -26,10 +26,10 @@ const TextSummarizer: FC = () => {
               />
               <div className="w-full flex flex-col lg:flex-row justify-center gap-5">
                 <TextSummarizerTextareaWrapper />
-                <SummarizedText>
+                {/* <SummarizedText>
                   <SummarizedText.SummarizedTextContent />
                   <SummarizedText.SummarizedTextFooter />
-                </SummarizedText>
+                </SummarizedText> */}
               </div>
             </TextareaSection>
           </main>

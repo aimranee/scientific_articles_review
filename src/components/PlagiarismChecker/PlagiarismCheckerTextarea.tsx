@@ -12,7 +12,6 @@ interface PlagiarismCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   setTextToCheck: (text: string) => void;
 }
-
 const getSearchWords = (checks: ChecksProps) => {
   return [
     `\\b(${checks?.checksList?.map((check) => check.result[0]).join("|")})\\b`,
