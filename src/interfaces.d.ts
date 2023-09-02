@@ -157,3 +157,8 @@ interface FileItemProps {
 interface TextCheckPropos {
   textToCheck: string;
 }
+
+interface ResProps {
+  res: string;
+  setRes: Dispatch<SetStateAction<string>>;
+}

@@ -4,9 +4,9 @@ import { Item } from "../components/GrammarGateItem";
 import IconWrapper from "@/components/IconWrapper";
 import ThemeButton from "@/components/ThemeButton";
 import FileUpload from "@/components/PdfExtraction/fileUpload";
-import { useState, useEffect, ChangeEvent } from "react";
 
 export default function Home() {
+
   return (
     <div className="flex justify-center items-center bg-white dark:bg-black text-text-gray dark:text-white w-full min-h-screen h-max">
       <ThemeButton className="!flex absolute right-2 top-2 z-10" />
