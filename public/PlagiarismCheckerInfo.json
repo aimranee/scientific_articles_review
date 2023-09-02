@@ -1,0 +1,28 @@
+{
+  "How It Works": [
+    "Our plagiarism checker uses advanced algorithms to analyze your text for similarities with other sources.",
+    "The tool identifies potential instances of plagiarism by comparing your text to a large database of existing content."
+  ],
+  "Limitations": [
+    "Our plagiarism checker may not catch all instances of plagiarism, especially if the copied content has been modified or paraphrased.",
+    "Some types of plagiarism, such as content translated from another language, may not be accurately detected.",
+    "The tool is designed to assist in detecting potential plagiarism, but it may not be foolproof."
+  ],
+  "Common Signs of Plagiarism": [
+    "Direct copying of sentences or paragraphs from sources without proper citation.",
+    "Failure to attribute ideas, concepts, or data to their original authors.",
+    "Using verbatim text from online sources without quotation marks or proper citation.",
+    "Submitting someone else's work as your own."
+  ],
+  "Tips": [
+    "Always properly cite your sources using the appropriate citation style.",
+    "When paraphrasing, ensure that the meaning of the original text is preserved and properly attributed.",
+    "Use quotation marks for verbatim text from sources and provide proper citations.",
+    "Maintain a record of your sources and references for easy verification."
+  ],
+  "Disclaimers": [
+    "While our plagiarism checker is designed to assist in identifying potential instances of plagiarism, it is not a substitute for academic integrity.",
+    "It is the responsibility of the user to ensure that their work is original and properly cited.",
+    "We are not liable for any consequences arising from the use of this tool."
+  ]
+}
