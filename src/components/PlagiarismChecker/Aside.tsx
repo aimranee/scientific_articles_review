@@ -16,8 +16,8 @@ const Aside: React.FC<PlagiarismProps> = ({
       ) : result ? (
         <div>
           <div>
-            {/* <p>Result Percent: {100 - parseFloat(result.percent)}</p>
-            <p>Words Count: {result["words_count"]}</p> */}
+            <p>Result Percent: {100 - parseFloat(result.percent)}</p>
+            <p>Words Count: {result["words_count"]}</p>
             <div>
               <p>Matches:</p>
               <ul>

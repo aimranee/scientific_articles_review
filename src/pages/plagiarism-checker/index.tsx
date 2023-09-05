@@ -2,6 +2,7 @@ import PlagiarismCheckerInfo from "@/../public/PlagiarismCheckerInfo.json";
 import PlagiarismCheckerTextareaWrapper from "@/components/PlagiarismChecker/PlagiarismCheckerTextareaWrapper";
 import TextareaSection from "@/components/TextareaSection";
 import Aside from "@/components/PlagiarismChecker/Aside";
+import { useBoundStore } from "@/zustand/useBoundStore";
 
 import { useState, useEffect } from "react";
 
@@ -10,8 +11,10 @@ import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import { useCleaner } from "@/hooks/useCleaner";
 import { type FC } from "react";
 import axios from "axios";
+import SkeletonText from "@/components/SkeletonText";
 
 const PlagiarismChecker: FC = () => {
+  const { checks } = useBoundStore();
   useCleaner();
   const [textareaContent, setTextareaContent] = useState(""); // Lifted state
   const [result, setResult] = useState(null);
@@ -53,7 +56,7 @@ const PlagiarismChecker: FC = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
+    <div className="flex flex-wrap gap-y-10 md:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-max min-h-screen pb-5 md:pt-0">
       <div id="modal-root"></div>
       <div className="flex flex-col w-full">
         <Navbar />
@@ -65,9 +68,11 @@ const PlagiarismChecker: FC = () => {
               className="bg-pink-1"
               content={PlagiarismCheckerInfo}
             />
-            <PlagiarismCheckerTextareaWrapper
-              setTextareaContent={setTextareaContent}
-            />
+            <div className="w-full flex flex-col lg:flex-row justify-center gap-5">
+              <PlagiarismCheckerTextareaWrapper
+                setTextareaContent={setTextareaContent}
+              />
+            </div>
           </TextareaSection>
         </main>
         <Aside
