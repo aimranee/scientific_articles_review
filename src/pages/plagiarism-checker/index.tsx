@@ -41,7 +41,7 @@ const PlagiarismChecker: FC = () => {
 
       if (response.data && response.data.result) {
         setResult(response.data.result);
-        console.log("response " + response);
+        console.log("response " + response.data.result);
       } else {
         setError("API response is missing expected data structure.");
       }
@@ -70,13 +70,13 @@ const PlagiarismChecker: FC = () => {
             />
           </TextareaSection>
         </main>
-        <Aside
-          textareaContent={textareaContent}
-          result={result}
-          isLoading={isLoading}
-          error={error}
-        />
       </div>
+      <Aside
+        textareaContent={textareaContent}
+        result={result}
+        isLoading={isLoading}
+        error={error}
+      />
     </div>
   );
 };
