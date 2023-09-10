@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Spin } from "antd";
+import { Card } from "antd";
 import { extractHighlightedTextByWordsTT } from "@/utils/highlithText";
-import Paragraph from "antd/es/typography/Paragraph";
-
+import { Typography } from "antd";
+const { Paragraph } = Typography;
 interface MatchType {
   highlight: string[];
   percent: number;
