@@ -1,11 +1,11 @@
-import { type FC } from "react"
-import RepositoryButton from "./RepositoryButton"
-import { ModalContentProps } from "@/interfaces"
-import { useRouter } from "next/router"
+import { type FC } from "react";
+import RepositoryButton from "./RepositoryButton";
+import { ModalContentProps } from "@/interfaces";
+import { useRouter } from "next/router";
 
 const ModalContent: FC<ModalContentProps> = ({ content }) => {
-  const sections = Object.entries(content)
-  const router = useRouter()
+  const sections = Object.entries(content);
+  const router = useRouter();
 
   return (
     <div className="flex flex-col gap-5 h-full">
@@ -17,15 +17,21 @@ const ModalContent: FC<ModalContentProps> = ({ content }) => {
           <li key={key}>
             <h3
               className={`text-base lg:text-lg font-semibold ${
-                router.pathname === "/grammar-checker" && "text-pink-1 dark:text-pink-400"
-              } ${router.pathname === "/text-summarizer" && "text-green-1 dark:text-green-400"}`}
+                router.pathname === "/grammar-checker" &&
+                "text-orange-1 dark:text-orange-400"
+              } ${
+                router.pathname === "/text-summarizer" &&
+                "text-purple-1 dark:text-purple-400"
+              }`}
             >
               {key}
             </h3>
             <ul className="flex flex-col gap-2">
               {values.map((value, index) => (
                 <li key={index}>
-                  <p className="text-text-gray dark:text-white text-sm lg:text-base">{value}</p>
+                  <p className="text-text-gray dark:text-white text-sm lg:text-base">
+                    {value}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -34,7 +40,7 @@ const ModalContent: FC<ModalContentProps> = ({ content }) => {
       </ul>
       <RepositoryButton />
     </div>
-  )
-}
+  );
+};
 
-export default ModalContent
+export default ModalContent;

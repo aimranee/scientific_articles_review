@@ -1,14 +1,17 @@
-import { useTextareaFooter } from "@/hooks/useTextareaFooter"
-import Button from "../Button"
-import Span from "../Span"
-import { type FC } from "react"
+import { useTextareaFooter } from "@/hooks/useTextareaFooter";
+import Button from "../Button";
+import Span from "../Span";
+import { type FC } from "react";
 
 interface GrammarCheckerTextareaFooterProps {
-  loading: boolean
+  loading: boolean;
 }
 
-const GrammarCheckerTextareaFooter: FC<GrammarCheckerTextareaFooterProps> = ({ loading }) => {
-  const { corrections, getWordsCount, correctionsCount, fixEverything } = useTextareaFooter()
+const GrammarCheckerTextareaFooter: FC<GrammarCheckerTextareaFooterProps> = ({
+  loading,
+}) => {
+  const { corrections, getWordsCount, correctionsCount, fixEverything } =
+    useTextareaFooter();
 
   return (
     <div className="w-full h-12 flex justify-between items-center px-5 text-sm md:text-base text-text-gray dark:text-white">
@@ -21,18 +24,22 @@ const GrammarCheckerTextareaFooter: FC<GrammarCheckerTextareaFooterProps> = ({ l
         type="button"
         className={`${
           corrections?.correctionsList?.length >= 1
-            ? "!bg-pink-1 hover:!bg-pink-2 !text-white"
-            : "!bg-pink-1 text-gray-600"
+            ? "!bg-orange-1 hover:!bg-orange-2 !text-white"
+            : "!bg-orange-1 text-gray-600"
         }
         ${
           corrections?.correctionsList?.length <= 0 && loading
-            ? "!bg-pink-1"
+            ? "!bg-orange-1"
             : "!bg-gray-500 text-gray-600"
         }`}
       />
-      <Span text="Mistakes" data={correctionsCount()} className="!text-red-500 text-center" />
+      <Span
+        text="Mistakes"
+        data={correctionsCount()}
+        className="!text-red-500 text-center"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default GrammarCheckerTextareaFooter
+export default GrammarCheckerTextareaFooter;

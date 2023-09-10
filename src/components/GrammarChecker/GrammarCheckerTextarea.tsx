@@ -1,32 +1,34 @@
-import { type FC, type ChangeEvent } from "react"
-import HighlightedText from "../HighlightedText"
-import { useBoundStore } from "@/zustand/useBoundStore"
-import Highlighter from "react-highlight-words"
-import ExampleTextButton from "../ExampleTextButton"
-import { CorrectionsProps } from "@/interfaces"
-import Textarea from "../Textarea"
-import isDesktopView from "@/utils/isDesktopView"
+import { type FC, type ChangeEvent } from "react";
+import HighlightedText from "../HighlightedText";
+import { useBoundStore } from "@/zustand/useBoundStore";
+import Highlighter from "react-highlight-words";
+import ExampleTextButton from "../ExampleTextButton";
+import { CorrectionsProps } from "@/interfaces";
+import Textarea from "../Textarea";
+import isDesktopView from "@/utils/isDesktopView";
 
 interface GrammarCheckerTextareaProps {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  setTextToCorrect: (text: string) => void
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  setTextToCorrect: (text: string) => void;
 }
 
 const getSearchWords = (corrections: CorrectionsProps) => {
   return [
-    `\\b(${corrections?.correctionsList?.map(correction => correction.result[0]).join("|")})\\b`,
-    "gi"
-  ]
-}
+    `\\b(${corrections?.correctionsList
+      ?.map((correction) => correction.result[0])
+      .join("|")})\\b`,
+    "gi",
+  ];
+};
 
 const EXAMPLE_TEXT =
-  "Me and my friend goes to the park last weekend, we plays on the swings, seesaw, and slides, and we have so much fun together."
+  "Me and my friend goes to the park last weekend, we plays on the swings, seesaw, and slides, and we have so much fun together.";
 
 const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   onChange,
-  setTextToCorrect
+  setTextToCorrect,
 }) => {
-  const { corrections, value } = useBoundStore()
+  const { corrections, value } = useBoundStore();
   return (
     <div className="relative w-full px-5">
       <div
@@ -52,11 +54,11 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCorrect}
-          className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-500"
+          className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-500"
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default GrammarCheckerTextarea
+export default GrammarCheckerTextarea;

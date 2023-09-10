@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Spin } from "antd";
-import { extractHighlightedTextByWords88 } from "@/utils/highlithText";
+import { extractHighlightedTextByWordsTT } from "@/utils/highlithText";
+import Paragraph from "antd/es/typography/Paragraph";
 
 interface MatchType {
   highlight: string[];
@@ -20,32 +21,33 @@ export const CardPlagia: React.FC<DataType> = ({
   textareaContent,
   loading,
 }) => (
-  <Card title="Checking">
+  <Card title="checkeing">
     {matches.map((match, index) => (
-      <Spin spinning={loading} key={index}>
-        <Card
-          type="inner"
-          title={match.url}
-          extra={<a href={match.url}>More</a>}
-        >
-          {/* Render the content for each match here */}
-          <div>
-            <p>Percent: {match.percent}</p>
+      <Card
+        key={index}
+        type="inner"
+        title={match.url}
+        extra={<a href={match.url}>More</a>}
+      >
+        {/* Render the content for each match here */}
+        <div>
+          <p>Percent: {match.percent}</p>
 
-            <ul>
-              {match.highlight.map((highlight: any, highlightIndex: number) => (
-                <li key={highlightIndex}>
-                  {`${extractHighlightedTextByWords88(
+          <ul>
+            {match.highlight.map((highlight: any, highlightIndex: number) => (
+              <span key={highlightIndex}>
+                <Paragraph ellipsis={{ rows: 2, expandable: true }}>
+                  {extractHighlightedTextByWordsTT(
                     textareaContent,
                     highlight,
                     10 // You can adjust the number of context words as needed
-                  )}`}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Card>
-      </Spin>
+                  )}
+                </Paragraph>
+              </span>
+            ))}
+          </ul>
+        </div>
+      </Card>
     ))}
   </Card>
 );

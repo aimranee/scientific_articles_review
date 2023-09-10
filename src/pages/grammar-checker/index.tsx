@@ -1,14 +1,14 @@
-import GrammarCheckerInfo from "@/../public/GrammarCheckerInfo.json"
-import GrammarCheckerTextareaWrapper from "@/components/GrammarChecker/GrammarCheckerTextareaWrapper"
-import TextareaSection from "@/components/TextareaSection"
-import Aside from "@/components/GrammarChecker/Aside"
-import Navbar from "@/components/Navbar"
-import { HeaderDescription, HeaderTitle } from "@/enums.d"
-import { useCleaner } from "@/hooks/useCleaner"
-import { type FC } from "react"
+import GrammarCheckerInfo from "@/../public/GrammarCheckerInfo.json";
+import GrammarCheckerTextareaWrapper from "@/components/GrammarChecker/GrammarCheckerTextareaWrapper";
+import TextareaSection from "@/components/TextareaSection";
+import Aside from "@/components/GrammarChecker/Aside";
+import Navbar from "@/components/Navbar";
+import { HeaderDescription, HeaderTitle } from "@/enums.d";
+import { useCleaner } from "@/hooks/useCleaner";
+import { type FC } from "react";
 
 const GrammarChecker: FC = () => {
-  useCleaner()
+  useCleaner();
 
   return (
     <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
@@ -20,7 +20,7 @@ const GrammarChecker: FC = () => {
             <TextareaSection.Header
               title={HeaderTitle.GRAMMAR_CHECKER}
               description={HeaderDescription.GRAMMAR_CHECKER}
-              className="bg-pink-1"
+              className="bg-orange-1"
               content={GrammarCheckerInfo}
             />
             <GrammarCheckerTextareaWrapper />
@@ -29,7 +29,7 @@ const GrammarChecker: FC = () => {
       </div>
       <Aside />
     </div>
-  )
-}
+  );
+};
 
-export default GrammarChecker
+export default GrammarChecker;

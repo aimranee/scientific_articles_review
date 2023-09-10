@@ -24,12 +24,12 @@ const VocabularyCheckerTextareaFooter: FC<
         type="button"
         className={`${
           corrections?.correctionsList?.length >= 1
-            ? "!bg-pink-1 hover:!bg-pink-2 !text-white"
-            : "!bg-pink-1 text-gray-600"
+            ? "!bg-green-1 hover:!bg-green-2 !text-white"
+            : "!bg-green-1 text-gray-600"
         }
         ${
           corrections?.correctionsList?.length <= 0 && loading
-            ? "!bg-pink-1"
+            ? "!bg-green-1"
             : "!bg-gray-500 text-gray-600"
         }`}
       />

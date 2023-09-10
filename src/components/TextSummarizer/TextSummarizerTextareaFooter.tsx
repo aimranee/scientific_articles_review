@@ -1,18 +1,18 @@
-import { type FC } from "react"
-import SummaryLength from "../SummaryLength"
-import Button from "../Button"
-import Span from "../Span"
-import { wordsCount } from "@/utils/wordsCount"
-import TextareaFooter from "../TextareaFooter"
+import { type FC } from "react";
+import SummaryLength from "../SummaryLength";
+import Button from "../Button";
+import Span from "../Span";
+import { wordsCount } from "@/utils/wordsCount";
+import TextareaFooter from "../TextareaFooter";
 
 interface TextSummarizerTextareaFooterProps {
-  value: string
-  loading: boolean
+  value: string;
+  loading: boolean;
 }
 
 const TextSummarizerTextareaFooter: FC<TextSummarizerTextareaFooterProps> = ({
   value,
-  loading
+  loading,
 }) => {
   return (
     <TextareaFooter>
@@ -29,13 +29,17 @@ const TextSummarizerTextareaFooter: FC<TextSummarizerTextareaFooterProps> = ({
           text="Summarize"
           type="submit"
           className={`
-          !bg-green-500
-          ${value.length >= 1 && loading ? "!bg-green-500" : ""}
-          ${value.length <= 0 ? "!bg-gray-500 text-white-2 dark:text-gray-600" : ""}`}
+          !bg-purple-500
+          ${value.length >= 1 && loading ? "!bg-purple-500" : ""}
+          ${
+            value.length <= 0
+              ? "!bg-gray-500 text-white-2 dark:text-gray-600"
+              : ""
+          }`}
         />
       </div>
     </TextareaFooter>
-  )
-}
+  );
+};
 
-export default TextSummarizerTextareaFooter
+export default TextSummarizerTextareaFooter;

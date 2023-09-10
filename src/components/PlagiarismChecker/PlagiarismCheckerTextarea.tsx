@@ -52,7 +52,7 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCheck}
-          className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-500"
+          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
         />
       )}
     </div>

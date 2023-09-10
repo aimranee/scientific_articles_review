@@ -1,32 +1,34 @@
-import { type FC, type ChangeEvent } from "react"
-import HighlightedText from "../HighlightedText"
-import { useBoundStore } from "@/zustand/useBoundStore"
-import Highlighter from "react-highlight-words"
-import ExampleTextButton from "../ExampleTextButton"
-import { CorrectionsProps } from "@/interfaces"
-import Textarea from "../Textarea"
-import isDesktopView from "@/utils/isDesktopView"
+import { type FC, type ChangeEvent } from "react";
+import HighlightedText from "../HighlightedText";
+import { useBoundStore } from "@/zustand/useBoundStore";
+import Highlighter from "react-highlight-words";
+import ExampleTextButton from "../ExampleTextButton";
+import { CorrectionsProps } from "@/interfaces";
+import Textarea from "../Textarea";
+import isDesktopView from "@/utils/isDesktopView";
 
 interface VocabularyCheckerTextareaProps {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  setTextToCorrect: (text: string) => void
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  setTextToCorrect: (text: string) => void;
 }
 
 const getSearchWords = (corrections: CorrectionsProps) => {
   return [
-    `\\b(${corrections?.correctionsList?.map(correction => correction.result[0]).join("|")})\\b`,
-    "gi"
-  ]
-}
+    `\\b(${corrections?.correctionsList
+      ?.map((correction) => correction.result[0])
+      .join("|")})\\b`,
+    "gi",
+  ];
+};
 
 const EXAMPLE_TEXT =
   "A medical procedure that is used to remove (ablate) or destroy the endometrial lining of a uterus.";
 
 const VocabularyCheckerTextarea: FC<VocabularyCheckerTextareaProps> = ({
   onChange,
-  setTextToCorrect
+  setTextToCorrect,
 }) => {
-  const { corrections, value } = useBoundStore()
+  const { corrections, value } = useBoundStore();
   return (
     <div className="relative w-full px-5">
       <div
@@ -52,11 +54,11 @@ const VocabularyCheckerTextarea: FC<VocabularyCheckerTextareaProps> = ({
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCorrect}
-          className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-500"
+          className="text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500"
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default VocabularyCheckerTextarea
+export default VocabularyCheckerTextarea;
