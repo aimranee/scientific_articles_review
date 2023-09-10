@@ -21,9 +21,10 @@ export const CardPlagia: React.FC<DataType> = ({
   textareaContent,
   loading,
 }) => (
-  <Card title="checkeing">
+  <Card title="Result of cheking">
     {matches.map((match, index) => (
       <Card
+        style={{ marginTop: "20px", marginBottom: "20px" }}
         key={index}
         type="inner"
         title={match.url}

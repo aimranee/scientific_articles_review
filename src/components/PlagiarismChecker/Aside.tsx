@@ -4,7 +4,15 @@ import DonutChart from "@/components/donut-chart";
 import { Progress, Space } from "antd";
 import { List, Spin } from "antd";
 import { CardPlagia } from "../cardPlagiaRes";
-
+const conicColors = {
+  "0%": "#87d068",
+  "50%": "#ffe58f",
+  "100%": "#ffccc7",
+};
+const twoColors = {
+  "0%": "#108ee9",
+  "100%": "#87d068",
+};
 const Aside: React.FC<PlagiarismProps> = ({
   textareaContent,
   result,
@@ -24,29 +32,39 @@ const Aside: React.FC<PlagiarismProps> = ({
             <p>Result Percent: {100 - parseInt(result.percent)}</p>
 
             <br />
-            <Space wrap>
-              <Progress
-                type="circle"
-                percent={100 - parseInt(result.percent)}
-                status={
-                  100 - parseInt(result.percent) > 60
-                    ? "exception"
-                    : 100 - parseInt(result.percent) >= 30
-                    ? "normal"
-                    : "success"
-                }
-              />
-            </Space>
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Space wrap>
+                <Progress
+                  type="dashboard"
+                  percent={100 - parseInt(result.percent)}
+                  strokeColor={conicColors}
+                />
+              </Space>
+            </div>
 
             {/* ;<p>Words Count: {result["words_count"]}</p> */}
           </div>
 
-          <CardPlagia
-            title="Card Title"
-            matches={result.matches}
-            textareaContent={textareaContent}
-            loading={false}
-          />
+          <div
+            style={{
+              height: "400px",
+
+              overflowY: "scroll",
+            }}
+          >
+            <CardPlagia
+              title="Card Title"
+              matches={result.matches}
+              textareaContent={textareaContent}
+              loading={false}
+            />
+          </div>
         </div>
       ) : (
         <p>Enter text to check for plagiarism.</p>
