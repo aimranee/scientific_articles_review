@@ -20,7 +20,7 @@ const VocabularyChecker: FC = () => {
             <TextareaSection.Header
               title={HeaderTitle.VOCABULARY_CHECKER}
               description={HeaderDescription.VOCABULARY_CHECKER}
-              className="bg-pink-1"
+              className="bg-green-1"
               content={VocabularyCheckerInfo}
             />
             <VocabularyCheckerTextareaWrapper />

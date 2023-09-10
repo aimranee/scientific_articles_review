@@ -62,7 +62,7 @@ const PlagiarismChecker: FC = () => {
             <TextareaSection.Header
               title={HeaderTitle.PLAGIARIM_CHECKER}
               description={HeaderDescription.PLAGIARIM_CHECKER}
-              className="bg-pink-1"
+              className="bg-blue-1"
               content={PlagiarismCheckerInfo}
             />
             <PlagiarismCheckerTextareaWrapper

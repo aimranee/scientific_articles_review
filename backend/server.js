@@ -18,7 +18,6 @@ app.post("/plagiarism-check", async (req, res) => {
   console.log("test" + req.body);
 
   const burp0_url = "https://papersowl.com:443/plagiarism-checker-send-data";
-  //console.log("11111  req "+req+ " res"+res)
   const burp0_cookies = {
     PHPSESSID: "qjc72e3vvacbtn4jd1af1k5qn1",
     first_interaction_user:
