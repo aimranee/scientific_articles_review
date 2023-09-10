@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-interface AsideProps {
-  textareaContent: string;
-  result: any; // Update the type based on your API response structure
-  isLoading: boolean;
-  error: string | null;
-}
+import { extractHighlightedTextByWords88 } from "@/utils/highlithText";
+import { PlagiarismProps } from "@/interfaces";
+import DonutChart from "@/components/donut-chart";
+import { Progress, Space } from "antd";
+import { List, Spin } from "antd";
+import { CardPlagia } from "../cardPlagiaRes";
 
-const Aside: React.FC<AsideProps> = ({
+const Aside: React.FC<PlagiarismProps> = ({
   textareaContent,
   result,
   isLoading,
@@ -22,62 +20,33 @@ const Aside: React.FC<AsideProps> = ({
         <p>Error: {error}</p>
       ) : result ? (
         <div>
-          {" "}
-          <table className="border-collapse border border-gray-500 w-full">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-500 px-4 py-2">
-                  Result Percent
-                </th>
-                <th className="border border-gray-500 px-4 py-2">
-                  Words Count
-                </th>
-                <th className="border border-gray-500 px-4 py-2">Matches</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-gray-500 px-4 py-2">
-                  {100 - parseFloat(result.percent)}
-                </td>
-                <td className="border border-gray-500 px-4 py-2">
-                  {result["words_count"]}
-                </td>
-                <td className="border border-gray-500 px-4 py-2">
-                  <table>
-                    <thead>
-                      <tr className="bg-gray-200">
-                        <th className="border border-gray-500 px-4 py-2">
-                          Highlight
-                        </th>
-                        <th className="border border-gray-500 px-4 py-2">
-                          Percent
-                        </th>
-                        <th className="border border-gray-500 px-4 py-2">
-                          URL
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {result.matches.map((match: any, index: number) => (
-                        <tr key={index}>
-                          <td className="border border-gray-500 px-4 py-2">
-                            {match.highlight}
-                          </td>
-                          <td className="border border-gray-500 px-4 py-2">
-                            {match.percent}
-                          </td>
-                          <td className="border border-gray-500 px-4 py-2">
-                            {match.url}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            <p>Result Percent: {100 - parseInt(result.percent)}</p>
+
+            <br />
+            <Space wrap>
+              <Progress
+                type="circle"
+                percent={100 - parseInt(result.percent)}
+                status={
+                  100 - parseInt(result.percent) > 60
+                    ? "exception"
+                    : 100 - parseInt(result.percent) >= 30
+                    ? "normal"
+                    : "success"
+                }
+              />
+            </Space>
+
+            {/* ;<p>Words Count: {result["words_count"]}</p> */}
+          </div>
+
+          <CardPlagia
+            title="Card Title"
+            matches={result.matches}
+            textareaContent={textareaContent}
+            loading={false}
+          />
         </div>
       ) : (
         <p>Enter text to check for plagiarism.</p>

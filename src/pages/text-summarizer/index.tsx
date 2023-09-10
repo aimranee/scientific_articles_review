@@ -21,14 +21,14 @@ const TextSummarizer: FC = () => {
               <TextareaSection.Header
                 title={HeaderTitle.TEXT_SUMMARIZER}
                 description={HeaderDescription.TEXT_SUMMARIZER}
-                className="!bg-green-1"
+                className="!bg-purple-500"
                 content={TextSummarizerInfo}
               />
               <div className="w-full flex flex-col lg:flex-row justify-center gap-5">
                 <TextSummarizerTextareaWrapper />
                 <SummarizedText>
                   <SummarizedText.SummarizedTextContent />
-                  <SummarizedText.SummarizedTextFooter />
+                  {/* <SummarizedText.SummarizedTextFooter /> */}
                 </SummarizedText>
               </div>
             </TextareaSection>
