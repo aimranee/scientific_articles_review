@@ -1,6 +1,9 @@
 import GrammarCheckerIcon from "../../public/grammar-checker-icon.svg";
 import TextSummarizerIcon from "../../public/text-summarizer-icon.svg";
+import PlagiarismCheckerIcon from "../../public/plagiarism-icon.svg";
+import vocabularyChecker from "../../public/vocubary-icon.svg";
 
+import upload from "../../public/upload-icon.svg";
 const links = [
   {
     name: "Grammar Checker",
@@ -12,7 +15,7 @@ const links = [
   {
     name: "Plagiarism",
     href: "/plagiarism-checker",
-    icon: GrammarCheckerIcon,
+    icon: PlagiarismCheckerIcon,
     backgroundColor: "bg-pink-1",
     borderColor: "!border-b-pink-1",
   },
@@ -26,14 +29,14 @@ const links = [
   {
     name: "Vocabulary",
     href: "/vocabulary-checker",
-    icon: TextSummarizerIcon,
+    icon: vocabularyChecker,
     backgroundColor: "bg-green-500",
     borderColor: "!border-b-green-500",
   },
   {
     name: "File Upload",
     href: "/pdf-upload",
-    icon: TextSummarizerIcon,
+    icon: upload,
     backgroundColor: "bg-green-500",
     borderColor: "!border-b-green-500",
   },
