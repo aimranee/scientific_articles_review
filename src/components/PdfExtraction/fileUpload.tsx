@@ -1,82 +1,106 @@
-import React, { useState } from "react";
-import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, message, Upload } from "antd";
+import React, { Fragment, useEffect, useState } from "react";
+import {
+  InboxOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+import { Upload, Typography, Card, Skeleton } from "antd";
 import axios from "axios";
 import { type FC } from "react";
-import Link from "next/link";
-import { parseString } from "xml2js";
-import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import { useRouter } from "next/router";
-import { ResProps } from "@/interfaces";
+const { Title, Paragraph, Text, Link } = Typography;
+
+import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 
 const FileUpload: FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [uploading, setUploading] = useState(false);
   const { Dragger } = Upload;
+  const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>(null);
-  const router = useRouter();
-  const handleUpload = () => {
-    // const handleUpload = () => {
-    // router.push({
-    //   pathname: "/pdf-upload",
-    //   query: { data: JSON.stringify(res) },
-    // });
-    // const formData = new FormData();
-    // const selectedFile = fileList[0];
-    // formData.append("file-upload", selectedFile, selectedFile.name);
-    // fileList.forEach((file) => {
-    //   // formData.append("file", file as RcFile);
-    //   formData.append("file-upload", file, file.name);
-    //   console.log("first " + file.name);
-    // });
-    // setUploading(false);
-    // await axios
-    //   .post("http://localhost:8080/upload", formData)
-    //   .then((res) =>
-    //     parseString(res, (err, parsedResult) => {
-    //       if (!err) {
-    //         setRes(parsedResult);
-    //       } else {
-    //         console.error("Error parsing XML:", err);
-    //       }
-    //     })
-    //   )
-    //   .then(() => {
-    //     // setFileList([]);
-    //     message.success("upload successfully.");
-    //   })
-    //   .catch(() => {
-    //     message.error("upload failed.");
-    //   })
-    //   .finally(() => {
-    //     setUploading(false);
-    //   });
-  };
 
-  // const uploadHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFile = event.target.files?.[0];
-  //   if (!selectedFile) return;
+  const components = res ? extractKeysAndValues(res) : []; //          bzaaaaf dyal les functions heer Mimi's idea
 
-  //   const formData = new FormData();
-  //   formData.append("file-upload", selectedFile, selectedFile.name);
+  function extractKeysAndValues(obj: any) {
+    const components: JSX.Element[] = [];
 
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/upload",
-  //       formData
-  //     );
-  //     // console.log("11111111111" + response.data.result);
-  //     parseString(response.data.result, (err, parsedResult) => {
-  //       if (!err) {
-  //         setRes(parsedResult);
-  //       } else {
-  //         console.error("Error parsing XML:", err);
-  //       }
-  //     });
-  //   } catch (error) {
-  //     console.error("Error uploading the file:", error);
-  //   }
-  // };
+    function recurse(current: any, property: any) {
+      // if (current === "front")
+      //   if (current === "article-meta") {
+      //     for (let i = 0; i < current.length; i++) {
+      //       recurse(current[i], property + ".");
+      //     }
+      //   }
+      if (Array.isArray(current)) {
+        console.log(
+          "LOG1 => current : " + current + "  property : " + property
+        );
+
+        for (let i = 0; i < current.length; i++) {
+          recurse(current[i], property);
+        }
+      } else if (typeof current === "object") {
+        for (const key in current) {
+          if (key !== "xref" && key !== "journal-meta" && key !== "back") {
+            if (current.hasOwnProperty(key)) {
+              // if (key.includes("article-meta")) {
+              //   console.log("hhhhhhhhhhhhhhhhhhhhhhhhh");
+
+              //   for (let i = 0; i < current.length; i++) {
+              //     recurse(current[key], property + "." + key);
+              //   }
+              // } else {
+              recurse(current[key], key);
+              // }
+            }
+          }
+        }
+      } else {
+        if (property === "title") {
+          if (current === "-") current = "Abstract";
+          const title = (
+            <Card style={{ marginTop: 16 }} loading={loading}>
+              <Typography.Title editable level={4} style={{ margin: 0 }}>
+                {current}
+              </Typography.Title>
+            </Card>
+          );
+          components.push(title);
+        }
+        if (property === "title-group.article-title") {
+          const bigTitle = <Title level={2}>Guidelines and Resources</Title>;
+          components.push(bigTitle);
+        }
+        if (property === "_" || property === "p") {
+          const p = (
+            <Card
+              style={{ marginTop: 16 }}
+              actions={[
+                <SettingOutlined key="setting" />,
+                <EditOutlined key="edit" />,
+                <EllipsisOutlined key="ellipsis" />,
+              ]}
+            >
+              <Skeleton loading={loading}>
+                <Paragraph
+                  editable={{
+                    maxLength: 50,
+                    autoSize: { maxRows: 5, minRows: 3 },
+                  }}
+                >
+                  {current}
+                </Paragraph>
+              </Skeleton>
+            </Card>
+          );
+          components.push(p);
+        }
+      }
+    }
+
+    recurse(obj, "");
+
+    return components;
+  }
 
   const props: UploadProps = {
     onRemove: (file) => {
@@ -87,38 +111,22 @@ const FileUpload: FC = () => {
     },
     beforeUpload: async (file) => {
       setFileList([file]);
-      console.log("first1");
 
       const formData = new FormData();
 
       formData.append("file-upload", file, file.name);
-      setUploading(true);
-      console.log("first");
+      setLoading(true);
 
       try {
         const response = await axios.post(
           "http://localhost:8080/upload",
           formData
         );
-        // console.log("11111111111" + response.data.result);
-        parseString(response.data.result, (err, parsedResult) => {
-          if (!err) {
-            message.success("upload successfully.");
-            setRes(parsedResult);
-            console.log(
-              "ttttt : " +
-                res.article.front["article-meta"]["title-group"][
-                  "article-title"
-                ]
-            );
-          } else {
-            console.error("Error parsing XML:", err);
-          }
-        });
+        setRes(response.data.result);
       } catch (error) {
         console.error("Error uploading the file:", error);
       }
-      setUploading(false);
+      setLoading(false);
 
       return false;
     },
@@ -139,26 +147,39 @@ const FileUpload: FC = () => {
           uploading company data or other banned files.
         </p>
       </Dragger>
-      <Button
-        type="primary"
-        onClick={handleUpload}
-        disabled={fileList.length === 0}
-        loading={uploading}
-        style={{ marginTop: 16 }}
-      >
-        {uploading ? (
-          "Uploading"
-        ) : (
-          <Link
-            href={{
-              pathname: "/pdf-upload",
-              // query: { res: JSON.stringify(res) },
-            }}
+
+      {res ? (
+        components.map((component, index) => (
+          <Fragment key={index}>{component}</Fragment>
+        ))
+      ) : (
+        <>
+          <Card style={{ marginTop: 16 }} loading={loading}>
+            <Typography.Title editable level={4} style={{ margin: 0 }}>
+              Title
+            </Typography.Title>
+          </Card>
+          <Card
+            style={{ marginTop: 16 }}
+            actions={[
+              <SettingOutlined key="setting" />,
+              <EditOutlined key="edit" />,
+              <EllipsisOutlined key="ellipsis" />,
+            ]}
           >
-            Start Upload
-          </Link>
-        )}
-      </Button>
+            <Skeleton loading={loading}>
+              <Paragraph
+                editable={{
+                  maxLength: 50,
+                  autoSize: { maxRows: 5, minRows: 3 },
+                }}
+              >
+                Paragraph
+              </Paragraph>
+            </Skeleton>
+          </Card>
+        </>
+      )}
     </>
   );
 };

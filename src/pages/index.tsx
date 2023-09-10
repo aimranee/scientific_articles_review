@@ -3,7 +3,6 @@ import links from "../utils/grammarGateLinks";
 import { Item } from "../components/GrammarGateItem";
 import IconWrapper from "@/components/IconWrapper";
 import ThemeButton from "@/components/ThemeButton";
-import FileUpload from "@/components/PdfExtraction/fileUpload";
 
 export default function Home() {
 
@@ -24,7 +23,6 @@ export default function Home() {
               {homeText?.secundaryDescription}
             </span>
           </p>
-          <FileUpload />
         </header>
         <ul className="h-full flex flex-wrap justify-center gap-x-20 gap-y-5 font-bold">
           {links?.map((link, index) => (

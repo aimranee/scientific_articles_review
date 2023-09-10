@@ -159,6 +159,9 @@ interface TextCheckPropos {
 }
 
 interface ResProps {
-  res: string;
   setRes: Dispatch<SetStateAction<string>>;
+}
+
+interface RessProps {
+  res: string;
 }
