@@ -6,6 +6,8 @@ import ExampleTextButton from "../ExampleTextButton";
 import { CorrectionsProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 interface GrammarCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -29,6 +31,22 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   setTextToCorrect,
 }) => {
   const { corrections, value } = useBoundStore();
+  const router = useRouter();
+  const { data } = router.query;
+  const setText = data ? data.toString() : "";
+  const [textValue, setTextValue] = useState(setText);
+  useEffect(() => {
+    setTextValue(setText);
+    setTextToCorrect(setText);
+  }, []);
+
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newTextValue = e.target.value;
+    setTextValue(newTextValue);
+    onChange(e); // Pass the event up to the parent component if needed
+    setTextToCorrect(newTextValue); // Set the text in setTextToCorrect
+  };
+
   return (
     <div className="relative w-full px-5">
       <div
@@ -44,13 +62,14 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
         />
       </div>
       <Textarea
-        onChange={onChange}
-        value={value}
+        onChange={handleTextareaChange}
+        value={textValue}
         name="text"
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-      {value.length <= 0 && (
+
+      {value.length <= 0 && setText.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCorrect}
