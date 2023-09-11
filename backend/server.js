@@ -129,7 +129,6 @@ const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("file-upload"), async (req, res) => {
   const uploadedFilePath = req.file.path;
-  // console.log(uploadedFilePath);
 
   try {
     const response = await axios.post(
@@ -142,13 +141,17 @@ app.post("/upload", upload.single("file-upload"), async (req, res) => {
       }
     );
 
-    // console.log("Response from external API:", response.data);
-
     fs.unlinkSync(uploadedFilePath); // Remove the temporary uploaded file
 
-    return res.status(200).json({
-      result: response.data,
-      msg: "File uploaded and processed",
+    xml2js.parseString(response.data, (err, result) => {
+      if (err) {
+        console.error("Error parsing XML:", err);
+      } else {
+        return res.status(200).json({
+          result: result,
+          msg: "File uploaded and processed",
+        });
+      }
     });
   } catch (error) {
     console.error("Error uploading or processing the file:", error);
