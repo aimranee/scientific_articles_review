@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import axios from "axios";
@@ -15,68 +15,7 @@ const FileUpload: FC = () => {
   const { Dragger } = Upload;
   const [res, setRes] = useState<any>(null);
   const router = useRouter();
-  const handleUpload = () => {
-    // const handleUpload = () => {
-    // router.push({
-    //   pathname: "/pdf-upload",
-    //   query: { data: JSON.stringify(res) },
-    // });
-    // const formData = new FormData();
-    // const selectedFile = fileList[0];
-    // formData.append("file-upload", selectedFile, selectedFile.name);
-    // fileList.forEach((file) => {
-    //   // formData.append("file", file as RcFile);
-    //   formData.append("file-upload", file, file.name);
-    //   console.log("first " + file.name);
-    // });
-    // setUploading(false);
-    // await axios
-    //   .post("http://localhost:8080/upload", formData)
-    //   .then((res) =>
-    //     parseString(res, (err, parsedResult) => {
-    //       if (!err) {
-    //         setRes(parsedResult);
-    //       } else {
-    //         console.error("Error parsing XML:", err);
-    //       }
-    //     })
-    //   )
-    //   .then(() => {
-    //     // setFileList([]);
-    //     message.success("upload successfully.");
-    //   })
-    //   .catch(() => {
-    //     message.error("upload failed.");
-    //   })
-    //   .finally(() => {
-    //     setUploading(false);
-    //   });
-  };
-
-  // const uploadHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFile = event.target.files?.[0];
-  //   if (!selectedFile) return;
-
-  //   const formData = new FormData();
-  //   formData.append("file-upload", selectedFile, selectedFile.name);
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/upload",
-  //       formData
-  //     );
-  //     // console.log("11111111111" + response.data.result);
-  //     parseString(response.data.result, (err, parsedResult) => {
-  //       if (!err) {
-  //         setRes(parsedResult);
-  //       } else {
-  //         console.error("Error parsing XML:", err);
-  //       }
-  //     });
-  //   } catch (error) {
-  //     console.error("Error uploading the file:", error);
-  //   }
-  // };
+  const handleUpload = () => {};
 
   const props: UploadProps = {
     onRemove: (file) => {
@@ -128,18 +67,20 @@ const FileUpload: FC = () => {
   return (
     <>
       <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
+        <p className="text-xl lg:text-3xl text-orange-500 dark:text-yellow-1 font-bold text-center">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">
+
+        <p className="text-xl lg:text-3xl text-gray-500 dark:text-white-1 font-bold text-center">
           Click or drag file to this area to upload
         </p>
-        <p className="ant-upload-hint">
+        <p className=" !text-lg  dark:text-white-1">
           Support for a single or bulk upload. Strictly prohibited from
           uploading company data or other banned files.
         </p>
       </Dragger>
       <Button
+        className=" !text-lg  dark:text-white-1"
         type="primary"
         onClick={handleUpload}
         disabled={fileList.length === 0}
