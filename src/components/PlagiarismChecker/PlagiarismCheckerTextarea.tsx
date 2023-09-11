@@ -6,7 +6,8 @@ import ExampleTextButton from "../ExampleTextButton";
 import { ChecksProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface PlagiarismCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -26,7 +27,22 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
   setTextToCheck,
 }) => {
   const { checks, value } = useBoundStore();
-  const [textValue, setTextValue] = useState("");
+  const router = useRouter();
+  const { data } = router.query;
+  const setText = data ? data.toString() : "";
+  const [textValue, setTextValue] = useState(setText);
+  useEffect(() => {
+    setTextValue(setText);
+    setTextToCheck(setText);
+  }, []);
+
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newTextValue = e.target.value;
+    setTextValue(newTextValue);
+    onChange(e); // Pass the event up to the parent component if needed
+    setTextToCheck(newTextValue); // Set the text in setTextToCorrect
+  };
+
   return (
     <div className="relative w-full px-5">
       <div
@@ -42,13 +58,13 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
         />
       </div>
       <Textarea
-        onChange={onChange}
-        value={value}
+        onChange={handleTextareaChange}
+        value={textValue}
         name="text"
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-      {value.length <= 0 && (
+      {value.length <= 0 && setText.length && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCheck}

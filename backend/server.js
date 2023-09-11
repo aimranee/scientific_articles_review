@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const axios = require("axios");
 const fs = require("fs");
+const xml2js = require("xml2js");
 const app = express();
 
 app.use(
@@ -147,8 +148,9 @@ app.post("/upload", upload.single("file-upload"), async (req, res) => {
       if (err) {
         console.error("Error parsing XML:", err);
       } else {
+        const modifiedResult = cleanUpText(result);
         return res.status(200).json({
-          result: result,
+          result: modifiedResult,
           msg: "File uploaded and processed",
         });
       }
@@ -161,6 +163,17 @@ app.post("/upload", upload.single("file-upload"), async (req, res) => {
     });
   }
 });
+
+function cleanUpText(obj) {
+  if (typeof obj === "string") {
+    return obj.replace(/[\r\n\t]+/g, " "); // Replace newline and tab characters with spaces
+  } else if (typeof obj === "object") {
+    for (const key in obj) {
+      obj[key] = cleanUpText(obj[key]); // Recursively clean up object properties
+    }
+  }
+  return obj;
+}
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
