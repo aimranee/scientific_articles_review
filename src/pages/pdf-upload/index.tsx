@@ -18,7 +18,7 @@ const PdfUpload: FC = () => {
               <TextareaSection.Header
                 title={HeaderTitle.GRAMMAR_CHECKER}
                 description={HeaderDescription.GRAMMAR_CHECKER}
-                className="bg-yellow-1"
+                className="bg-yellow-500"
                 content={GrammarCheckerInfo}
               />
               <FileUpload />
