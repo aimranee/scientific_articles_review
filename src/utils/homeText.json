@@ -1,11 +1,11 @@
 {
-  "title": "HealthChecker",
-  "subtitle": "Your All-In-One solution for writing a Scinetific Health Article!",
+  "title": "Paper checker",
+  "subtitle": "Your All-In-One solution for writing a Scinetific  Article!",
   "description": "",
   "secundaryDescription": "",
   "functionalities": [
     {
-      "title": "Health Checker",
+      "title": "Grammar Checker",
       "description": "Our grammar checker identifies grammar, spelling, and punctuation errors in your writing. It suggests corrections and provides explanations to help you understand the rules.",
       "link": "/grammar-checker"
     },
@@ -24,10 +24,11 @@
       "description": "Our plagiarism checker scans your text to detect potential instances of plagiarism and provides detailed information about potential sources or references that match content in your text, ensuring the originality and authenticity of your content.",
       "link": "/plagiarism-checker"
     },
-    {
-      "title": "Import PDF",
-      "description": "Our plagiarism checker scans your text to detect potential instances of plagiarism and provides detailed information about potential sources or references that match content in your text, ensuring the originality and authenticity of your content.",
-      "link": "/pdf_import"
-    }
+{
+  "title": "Import PDF",
+  "description": "Our PDF import tool allows you to easily upload and import your PDF documents section by section. Once uploaded, you can efficiently work on individual sections, making it simple to perform tasks like grammar checking, plagiarism detection, and summary generation on specific parts of your paper. Enhance the quality and originality of your content with our intuitive PDF import feature.",
+  "link": "/pdf-import"
+}
+
   ]
 }

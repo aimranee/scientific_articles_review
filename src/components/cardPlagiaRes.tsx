@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Spin } from "antd";
+import { Card } from "antd";
 import { extractHighlightedTextByWordsTT } from "@/utils/highlithText";
-import Paragraph from "antd/es/typography/Paragraph";
-
+import { Typography } from "antd";
+const { Paragraph } = Typography;
 interface MatchType {
   highlight: string[];
   percent: number;
@@ -21,9 +21,10 @@ export const CardPlagia: React.FC<DataType> = ({
   textareaContent,
   loading,
 }) => (
-  <Card title="checkeing">
+  <Card title="Result of cheking">
     {matches.map((match, index) => (
       <Card
+        style={{ marginTop: "20px", marginBottom: "20px" }}
         key={index}
         type="inner"
         title={match.url}

@@ -7,9 +7,9 @@ interface GrammarCheckerTextareaFooterProps {
   loading: boolean;
 }
 
-const GrammarCheckerTextareaFooter: FC<GrammarCheckerTextareaFooterProps> = ({
-  loading,
-}) => {
+const PlagiarimsCheckerTextareaFooter: FC<
+  GrammarCheckerTextareaFooterProps
+> = ({ loading }) => {
   const { corrections, getWordsCount, correctionsCount, fixEverything } =
     useTextareaFooter();
 
@@ -42,4 +42,4 @@ const GrammarCheckerTextareaFooter: FC<GrammarCheckerTextareaFooterProps> = ({
   );
 };
 
-export default GrammarCheckerTextareaFooter;
+export default PlagiarimsCheckerTextareaFooter;

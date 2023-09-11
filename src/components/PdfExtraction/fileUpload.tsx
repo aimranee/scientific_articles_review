@@ -235,13 +235,14 @@ const FileUpload: FC = () => {
   return (
     <>
       <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
+        <p className="text-xl lg:text-3xl text-orange-500 dark:text-yellow-1 font-bold text-center">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">
+
+        <p className="text-xl lg:text-3xl text-gray-500 dark:text-white-1 font-bold text-center">
           Click or drag file to this area to upload
         </p>
-        <p className="ant-upload-hint">
+        <p className=" !text-lg  dark:text-white-1">
           Support for a single or bulk upload. Strictly prohibited from
           uploading company data or other banned files.
         </p>

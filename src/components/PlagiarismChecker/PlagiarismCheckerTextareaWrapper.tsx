@@ -11,7 +11,7 @@ const PlagiarismCheckerTextareaWrapper: React.FC<
   PlagiarismCheckerTextareaWrapperProps
 > = ({ setTextareaContent }) => {
   // const [exampleToCheck, setExampleToCheck] = useState(Exemple_to_check);
-  const { onChange, loading, setTextToCheck } = usePlagiarismChecker(); // Assuming that usePlagiarismChecker returns these values
+  const { onChange, setTextToCheck } = usePlagiarismChecker(); // Assuming that usePlagiarismChecker returns these values
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const content = e.target.value;
     setTextareaContent(content); // Update the lifted state
@@ -24,7 +24,7 @@ const PlagiarismCheckerTextareaWrapper: React.FC<
         onChange={handleTextareaChange}
         setTextToCheck={setTextToCheck}
       />
-      <PlagiarismCheckerTextareaFooter loading={loading} />
+      <PlagiarismCheckerTextareaFooter loading={true} />
     </div>
   );
 };

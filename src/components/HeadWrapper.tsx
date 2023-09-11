@@ -8,12 +8,12 @@ const HeadWrapper: FC<ChildrenProps> = ({ children }) => {
     <>
       <Head>
         <title>
-          Health Checker | Your all-in-one Solution for Writing Scientific
-          Health Articles
+          Paper Checker | Your all-in-one Solution for Writing Scientific
+          Articles
         </title>
         <meta
           name="description"
-          content="HealthChecker is a platform that provides a suite of grammar tools, including a grammar checker and text summarizer. Improve your writing with our tools, designed to catch grammar and spelling errors, and generate concise summaries of lengthy text. Try our grammar tools today and take your writing to the next level."
+          content="Paper checker is a platform that provides a suite of cheking tools, including a grammar checker, text summarizer, plagiarism system and detecter for vocabulary and definitions . Improve your paper scientific with our tools. Try our solution today and take your writing to the next level."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={logo.src} />

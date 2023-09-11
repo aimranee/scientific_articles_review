@@ -32,5 +32,5 @@ export const usePlagiarismChecker = () => {
     setValue(e.target.value);
   };
 
-  return { onChange, loading, setTextToCheck };
+  return { onChange, setTextToCheck };
 };

@@ -5,13 +5,12 @@ import IconWrapper from "@/components/IconWrapper";
 import ThemeButton from "@/components/ThemeButton";
 
 export default function Home() {
-
   return (
     <div className="flex justify-center items-center bg-white dark:bg-black text-text-gray dark:text-white w-full min-h-screen h-max">
       <ThemeButton className="!flex absolute right-2 top-2 z-10" />
       <main className="flex flex-col sm:items-center gap-12 md:gap-20 w-full max-w-max h-full px-5 py-10 relative">
         <header className="flex flex-col gap-5 items-center justify-center w-full max-w-[900px]">
-          <h1 className="text-3xl lg:text-5xl text-[#F380F0] text-center font-bold">
+          <h1 className="text-3xl lg:text-5xl text-[#649b65] text-center font-bold">
             {homeText?.title}
           </h1>
           <h2 className="text-xl lg:text-3xl text-orange-500 dark:text-yellow-1 font-bold text-center">
