@@ -174,3 +174,7 @@ interface ResProps {
 interface RessProps {
   res: string;
 }
+
+interface PlagiarismCheckerTextareaWrapperProps {
+  textareaContent: Dispatch<SetStateAction<string>>;
+}

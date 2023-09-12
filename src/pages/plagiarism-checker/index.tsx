@@ -66,7 +66,7 @@ const PlagiarismChecker: FC = () => {
               content={PlagiarismCheckerInfo}
             />
             <PlagiarismCheckerTextareaWrapper
-              setTextareaContent={setTextareaContent}
+              textareaContent={setTextareaContent}
             />
           </TextareaSection>
         </main>

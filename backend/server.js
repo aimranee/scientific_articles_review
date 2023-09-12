@@ -16,7 +16,7 @@ app.use(
 );
 
 app.post("/plagiarism-check", async (req, res) => {
-  console.log("test" + req.body);
+  // console.log("test" + req.body);
 
   const burp0_url = "https://papersowl.com:443/plagiarism-checker-send-data";
   const burp0_cookies = {
@@ -88,20 +88,20 @@ app.post("/plagiarism-check", async (req, res) => {
       params: burp0_cookies,
       responseType: "json",
     });
-    console.log("222   response 2 " + response.data);
+    // console.log("222   response 2 " + response.data);
 
     const result = response.data;
-    console.log("\n[!] Word count : " + result.words_count);
-    console.log("\n[!] Turnitin index : " + (100 - parseFloat(result.percent)));
-    console.log("\n[!] Matches : " + result.matches);
+    // console.log("\n[!] Word count : " + result.words_count);
+    // console.log("\n[!] Turnitin index : " + (100 - parseFloat(result.percent)));
+    // console.log("\n[!] Matches : " + result.matches);
 
-    console.log("\n[!] Matches:");
-    result["matches"].forEach((element) => {
-      console.log("\n[!] Matches : " + JSON.stringify(element));
-    });
-    console.log("\n Matches : wtfffffffffffffff");
+    // console.log("\n[!] Matches:");
+    // result["matches"].forEach((element) => {
+    //   console.log("\n[!] Matches : " + JSON.stringify(element));
+    // });
+    // console.log("\n Matches : wtfffffffffffffff");
 
-    console.log("\n[!] Matches : " + result["matches"]);
+    // console.log("\n[!] Matches : " + result["matches"]);
 
     return res.status(200).json({
       result: result,

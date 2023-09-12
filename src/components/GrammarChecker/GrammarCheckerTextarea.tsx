@@ -35,6 +35,7 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   const { data } = router.query;
   const setText = data ? data.toString() : "";
   const [textValue, setTextValue] = useState(setText);
+  
   useEffect(() => {
     setTextValue(setText);
     setTextToCorrect(setText);

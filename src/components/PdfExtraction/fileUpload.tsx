@@ -22,6 +22,15 @@ const FileUpload: FC = () => {
   const front = res ? extractFront(res) : [];
   const mergedArray = [...front, ...body];
 
+  useEffect(() => {
+    // Check Local Storage for the "uploadResult" key
+    const storedUploadResult = localStorage.getItem("uploadResult");
+    if (storedUploadResult) {
+      // If it exists, parse it from JSON and set it in the state
+      setRes(JSON.parse(storedUploadResult));
+    }
+  }, []);
+
   const handleSettingClick = (current: any) => {
     // Handle the click for the Setting icon
     console.log("Setting icon clicked for:", current);
@@ -277,6 +286,10 @@ const FileUpload: FC = () => {
           formData
         );
         setRes(response.data.result);
+        localStorage.setItem(
+          "uploadResult",
+          JSON.stringify(response.data.result)
+        );
       } catch (error) {
         console.error("Error uploading the file:", error);
       }
