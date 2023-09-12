@@ -6,28 +6,36 @@ import Navbar from "@/components/Navbar";
 import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import { useCleaner } from "@/hooks/useCleaner";
 import { type FC } from "react";
+import { Layout, Space } from "antd";
+const { Header, Footer, Sider, Content } = Layout;
 
 const GrammarChecker: FC = () => {
   useCleaner();
-
+  const headerStyle: React.CSSProperties = {
+    textAlign: "center",
+  };
   return (
     <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
       <div id="modal-root"></div>
       <div className="flex flex-col w-full">
-        <Navbar />
-        <main className="w-full h-max md:h-full flex justify-center items-center px-5 relative">
-          <TextareaSection>
-            <TextareaSection.Header
-              title={HeaderTitle.GRAMMAR_CHECKER}
-              description={HeaderDescription.GRAMMAR_CHECKER}
-              className="bg-orange-1"
-              content={GrammarCheckerInfo}
-            />
-            <GrammarCheckerTextareaWrapper />
-          </TextareaSection>
-        </main>
+        <Header style={headerStyle}>
+          <Navbar />
+        </Header>
+        <Layout hasSider>
+          <main className="w-full h-max md:h-full flex justify-center items-center px-5 relative">
+            <TextareaSection>
+              <TextareaSection.Header
+                title={HeaderTitle.GRAMMAR_CHECKER}
+                description={HeaderDescription.GRAMMAR_CHECKER}
+                className="bg-orange-1"
+                content={GrammarCheckerInfo}
+              />
+              <GrammarCheckerTextareaWrapper />
+            </TextareaSection>
+          </main>{" "}
+          <Aside />
+        </Layout>
       </div>
-      <Aside />
     </div>
   );
 };
