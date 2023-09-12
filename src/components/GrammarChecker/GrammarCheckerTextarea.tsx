@@ -1,4 +1,4 @@
-import { type FC, type ChangeEvent } from "react";
+import { type FC, type ChangeEvent, useState, useEffect } from "react";
 import HighlightedText from "../HighlightedText";
 import { useBoundStore } from "@/zustand/useBoundStore";
 import Highlighter from "react-highlight-words";
@@ -7,7 +7,6 @@ import { CorrectionsProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 
 interface GrammarCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -35,7 +34,7 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   const { data } = router.query;
   const setText = data ? data.toString() : "";
   const [textValue, setTextValue] = useState(setText);
-  
+
   useEffect(() => {
     setTextValue(setText);
     setTextToCorrect(setText);
@@ -50,6 +49,7 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
 
   return (
     <div className="relative w-full px-5">
+      e
       <div
         className="!text-transparent caret-white absolute inset-0 bg-transparent w-full max-h-[250px] md:max-h-[500px] h-max md:h-screen outline-none resize-none p-5 text-base lg:text-lg"
         spellCheck={false}
@@ -63,14 +63,13 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
         />
       </div>
       <Textarea
-        onChange={handleTextareaChange}
-        value={textValue}
+        onChange={onChange}
+        value={value}
         name="text"
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-
-      {value.length <= 0 && setText.length <= 0 && (
+      {value.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCorrect}
