@@ -1,28 +1,20 @@
-import React, { useState } from "react";
-import { usePlagiarismChecker } from "@/hooks/usePlagiarismChecker";
-
+import React from "react";
+import { type FC, type ChangeEvent } from "react";
 import PlagiarismCheckerTextareaFooter from "./PlagiarismCheckerTextareaFooter";
 import PlagiarismCheckerTextarea from "./PlagiarismCheckerTextarea";
-import { TextCheckPropos } from "@/interfaces";
-interface PlagiarismCheckerTextareaWrapperProps {
-  setTextareaContent: (content1: string) => void;
-}
-const PlagiarismCheckerTextareaWrapper: React.FC<
+import {
+  PlagiarismCheckerTextareaWrapperProps,
+  TextCheckPropos,
+} from "@/interfaces";
+
+const PlagiarismCheckerTextareaWrapper: FC<
   PlagiarismCheckerTextareaWrapperProps
-> = ({ setTextareaContent }) => {
-  // const [exampleToCheck, setExampleToCheck] = useState(Exemple_to_check);
-  const { onChange, setTextToCheck } = usePlagiarismChecker(); // Assuming that usePlagiarismChecker returns these values
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const content = e.target.value;
-    setTextareaContent(content); // Update the lifted state
-    onChange(e);
-    console.log("texterea   " + content);
-  };
+> = ({ textareaContent }) => {
+
   return (
     <div className="border dark:border-gray-2 bg-white dark:bg-gray-1 rounded-md shadow-lg">
       <PlagiarismCheckerTextarea
-        onChange={handleTextareaChange}
-        setTextToCheck={setTextToCheck}
+        setTextToCheck={textareaContent}
       />
       <PlagiarismCheckerTextareaFooter loading={true} />
     </div>

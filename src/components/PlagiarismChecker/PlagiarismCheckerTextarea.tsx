@@ -10,7 +10,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 interface PlagiarismCheckerTextareaProps {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   setTextToCheck: (text: string) => void;
 }
 const getSearchWords = (checks: ChecksProps) => {
@@ -23,7 +22,6 @@ const EXAMPLE_TEXT =
   "Le dragon est une créature légendaire représentée comme une sorte de gigantesque reptile, ailes déployées et pattes armées de griffes.";
 
 const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
-  onChange,
   setTextToCheck,
 }) => {
   const { checks, value } = useBoundStore();
@@ -39,8 +37,10 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newTextValue = e.target.value;
     setTextValue(newTextValue);
-    onChange(e); // Pass the event up to the parent component if needed
-    setTextToCheck(newTextValue); // Set the text in setTextToCorrect
+    const wordsCount = newTextValue.split(/\s+/);
+    if (wordsCount.length >= 20) {
+      setTextToCheck(newTextValue); // Set the text in setTextToCorrect
+    }
   };
 
   return (
@@ -64,7 +64,7 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-      {value.length <= 0 && setText.length && (
+      {value.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCheck}

@@ -1,4 +1,4 @@
-import { type FC, type ChangeEvent } from "react";
+import { type FC, type ChangeEvent, useState, useEffect } from "react";
 import HighlightedText from "../HighlightedText";
 import { useBoundStore } from "@/zustand/useBoundStore";
 import Highlighter from "react-highlight-words";
@@ -6,6 +6,7 @@ import ExampleTextButton from "../ExampleTextButton";
 import { CorrectionsProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
+import { useRouter } from "next/router";
 
 interface GrammarCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -29,6 +30,23 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   setTextToCorrect,
 }) => {
   const { corrections, value } = useBoundStore();
+  const router = useRouter();
+  const { data } = router.query;
+  const setText = data ? data.toString() : "";
+  const [textValue, setTextValue] = useState(setText);
+
+  useEffect(() => {
+    setTextValue(setText);
+    setTextToCorrect(setText);
+  }, []);
+
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newTextValue = e.target.value;
+    setTextValue(newTextValue);
+    onChange(e); // Pass the event up to the parent component if needed
+    setTextToCorrect(newTextValue); // Set the text in setTextToCorrect
+  };
+
   return (
     <div className="relative w-full px-5">
       e

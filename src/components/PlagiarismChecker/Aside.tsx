@@ -1,18 +1,12 @@
-import { extractHighlightedTextByWords88 } from "@/utils/highlithText";
 import { PlagiarismProps } from "@/interfaces";
-import DonutChart from "@/components/donut-chart";
 import { Progress, Space } from "antd";
-import { List, Spin } from "antd";
 import { CardPlagia } from "../cardPlagiaRes";
 const conicColors = {
   "0%": "#87d068",
   "50%": "#ffe58f",
   "100%": "#ffccc7",
 };
-const twoColors = {
-  "0%": "#108ee9",
-  "100%": "#87d068",
-};
+
 const Aside: React.FC<PlagiarismProps> = ({
   textareaContent,
   result,
