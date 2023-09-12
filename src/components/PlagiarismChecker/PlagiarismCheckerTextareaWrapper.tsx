@@ -10,12 +10,9 @@ import {
 const PlagiarismCheckerTextareaWrapper: FC<
   PlagiarismCheckerTextareaWrapperProps
 > = ({ textareaContent }) => {
-
   return (
     <div className="border dark:border-gray-2 bg-white dark:bg-gray-1 rounded-md shadow-lg">
-      <PlagiarismCheckerTextarea
-        setTextToCheck={textareaContent}
-      />
+      <PlagiarismCheckerTextarea setTextToCheck={textareaContent} />
       <PlagiarismCheckerTextareaFooter loading={true} />
     </div>
   );
