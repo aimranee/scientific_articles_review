@@ -15,12 +15,11 @@ const GrammarChecker: FC = () => {
     textAlign: "center",
   };
   return (
-    <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
+    <div className="flex flex-wrap gap-y-10 md:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-max min-h-screen pb-5 md:pt-0">
       <div id="modal-root"></div>
       <div className="flex flex-col w-full">
-        <Header style={headerStyle}>
-          <Navbar />
-        </Header>
+        <Navbar />
+
         <Layout hasSider>
           <main className="w-full h-max md:h-full flex justify-center items-center px-5 relative">
             <TextareaSection>
