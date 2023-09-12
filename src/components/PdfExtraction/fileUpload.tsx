@@ -10,6 +10,7 @@ import axios from "axios";
 import { type FC } from "react";
 const { Title, Paragraph } = Typography;
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
+import Link from "next/link";
 
 const FileUpload: FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -89,18 +90,45 @@ const FileUpload: FC = () => {
             <Card
               style={{ marginTop: 16 }}
               actions={[
-                <SettingOutlined
-                  key="setting"
-                  onClick={() => handleSettingClick(current)}
-                />,
-                <EditOutlined
-                  key="edit"
-                  onClick={() => handleEditClick(current)}
-                />,
-                <EllipsisOutlined
-                  key="ellipsis"
-                  onClick={() => handleEllipsisClick(current)}
-                />,
+                <Link
+                  href={{
+                    pathname: "/grammar-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <SettingOutlined
+                    key="setting"
+                    onClick={() => handleSettingClick(current)}
+                  />
+                </Link>,
+                <Link
+                  href={{
+                    pathname: "/vocabulary-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <EditOutlined
+                    key="edit"
+                    onClick={() => handleEditClick(current)}
+                  />
+                </Link>,
+                <Link
+                  href={{
+                    pathname: "/plagiarism-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <EllipsisOutlined
+                    key="ellipsis"
+                    onClick={() => handleEllipsisClick(current)}
+                  />
+                </Link>,
               ]}
             >
               <Skeleton loading={loading} active>
@@ -167,18 +195,45 @@ const FileUpload: FC = () => {
             <Card
               style={{ marginTop: 16 }}
               actions={[
-                <SettingOutlined
-                  key="setting"
-                  onClick={() => handleSettingClick(current)}
-                />,
-                <EditOutlined
-                  key="edit"
-                  onClick={() => handleEditClick(current)}
-                />,
-                <EllipsisOutlined
-                  key="ellipsis"
-                  onClick={() => handleEllipsisClick(current)}
-                />,
+                <Link
+                  href={{
+                    pathname: "/grammar-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <SettingOutlined
+                    key="setting"
+                    onClick={() => handleSettingClick(current)}
+                  />
+                </Link>,
+                <Link
+                  href={{
+                    pathname: "/vocabulary-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <EditOutlined
+                    key="edit"
+                    onClick={() => handleEditClick(current)}
+                  />
+                </Link>,
+                <Link
+                  href={{
+                    pathname: "/plagiarism-checker",
+                    query: {
+                      data: current,
+                    },
+                  }}
+                >
+                  <EllipsisOutlined
+                    key="ellipsis"
+                    onClick={() => handleEllipsisClick(current)}
+                  />
+                </Link>,
               ]}
             >
               <Skeleton loading={loading}>
