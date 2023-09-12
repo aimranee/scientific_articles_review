@@ -1,7 +1,7 @@
-import { type FC } from "react"
-import ThemeButton from "./ThemeButton"
-import NavbarLinks from "./NavbarLinks"
-import Logo from "./Logo"
+import { type FC } from "react";
+import ThemeButton from "./ThemeButton";
+import NavbarLinks from "./NavbarLinks";
+import Logo from "./Logo";
 
 const Navbar: FC = () => {
   return (
@@ -12,7 +12,7 @@ const Navbar: FC = () => {
         <ThemeButton className="!hidden md:!flex" />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

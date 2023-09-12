@@ -2,7 +2,9 @@ import PlagiarismCheckerInfo from "@/../public/PlagiarismCheckerInfo.json";
 import PlagiarismCheckerTextareaWrapper from "@/components/PlagiarismChecker/PlagiarismCheckerTextareaWrapper";
 import TextareaSection from "@/components/TextareaSection";
 import Aside from "@/components/PlagiarismChecker/Aside";
+import { Layout, Space } from "antd";
 
+const { Header, Footer, Sider, Content } = Layout;
 import { useState, useEffect } from "react";
 
 import Navbar from "@/components/Navbar";
@@ -10,7 +12,15 @@ import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import { useCleaner } from "@/hooks/useCleaner";
 import { type FC } from "react";
 import axios from "axios";
-
+const headerStyle: React.CSSProperties = {
+  textAlign: "center",
+};
+const siderStyle: React.CSSProperties = {
+  textAlign: "center",
+};
+const contentStyle: React.CSSProperties = {
+  textAlign: "center",
+};
 const PlagiarismChecker: FC = () => {
   useCleaner();
   const [textareaContent, setTextareaContent] = useState(""); // Lifted state
@@ -56,27 +66,32 @@ const PlagiarismChecker: FC = () => {
     <div className="flex flex-wrap gap-y-5 lg:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-screen md:pt-0">
       <div id="modal-root"></div>
       <div className="flex flex-col w-full">
-        <Navbar />
-        <main className="w-full h-max md:h-full flex justify-center items-center px-5 relative">
-          <TextareaSection>
-            <TextareaSection.Header
-              title={HeaderTitle.PLAGIARIM_CHECKER}
-              description={HeaderDescription.PLAGIARIM_CHECKER}
-              className="bg-blue-1"
-              content={PlagiarismCheckerInfo}
-            />
-            <PlagiarismCheckerTextareaWrapper
-              textareaContent={setTextareaContent}
-            />
-          </TextareaSection>
-        </main>
+        <Header style={headerStyle}>
+          <Navbar />
+        </Header>
+
+        <Layout hasSider>
+          <main className="w-full h-max md:h-full flex justify-center  dark:bg-black text-white  items-center px-5 relative">
+            <TextareaSection>
+              <TextareaSection.Header
+                title={HeaderTitle.PLAGIARIM_CHECKER}
+                description={HeaderDescription.PLAGIARIM_CHECKER}
+                className="bg-blue-1"
+                content={PlagiarismCheckerInfo}
+              />
+              <PlagiarismCheckerTextareaWrapper
+                textareaContent={setTextareaContent}
+              />
+            </TextareaSection>
+          </main>
+          <Aside
+            textareaContent={textareaContent}
+            result={result}
+            isLoading={isLoading}
+            error={error}
+          />
+        </Layout>
       </div>
-      <Aside
-        textareaContent={textareaContent}
-        result={result}
-        isLoading={isLoading}
-        error={error}
-      />
     </div>
   );
 };
