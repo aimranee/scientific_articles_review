@@ -51,7 +51,7 @@ const PlagiarismChecker: FC = () => {
 
       if (response.data && response.data.result) {
         setResult(response.data.result);
-        console.log("response " + response.data.result);
+        // console.log("response " + response.data.result);
       } else {
         setError("API response is missing expected data structure.");
       }
