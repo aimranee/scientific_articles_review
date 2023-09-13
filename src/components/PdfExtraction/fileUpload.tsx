@@ -1,11 +1,28 @@
 import React, { Fragment, useEffect, useState } from "react";
+import TextSummarizerIcon from "../../public/text-summarizer-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faListCheck,
+  faSpellCheck,
+  faBook,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   InboxOutlined,
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
+  DownloadOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
-import { Upload, Typography, Card, Skeleton, FloatButton } from "antd";
+import {
+  Upload,
+  Typography,
+  Card,
+  Skeleton,
+  FloatButton,
+  Tooltip,
+  Button,
+} from "antd";
 import axios from "axios";
 import { type FC } from "react";
 const { Title, Paragraph } = Typography;
@@ -117,10 +134,12 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <SettingOutlined
-                    key="setting"
-                    onClick={() => handleSettingClick(current)}
-                  />
+                  {" "}
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faSpellCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -130,10 +149,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleEditClick(current)}
-                  />
+                  <Tooltip title="check vocabulary">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faBook} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -143,10 +163,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EllipsisOutlined
-                    key="ellipsis"
-                    onClick={() => handleEllipsisClick(current)}
-                  />
+                  <Tooltip title="check plagiarism">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faListCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
               ]}
             >
@@ -233,10 +254,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <SettingOutlined
-                    key="setting"
-                    onClick={() => handleSettingClick(current)}
-                  />
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faSpellCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -246,10 +268,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleEditClick(current)}
-                  />
+                  <Tooltip title="check vocabulary ">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faBook} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -259,10 +282,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EllipsisOutlined
-                    key="ellipsis"
-                    onClick={() => handleEllipsisClick(current)}
-                  />
+                  <Tooltip title="check plagiarism">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faListCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
               ]}
             >
