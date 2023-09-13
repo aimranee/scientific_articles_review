@@ -177,4 +177,5 @@ interface RessProps {
 
 interface PlagiarismCheckerTextareaWrapperProps {
   textareaContent: Dispatch<SetStateAction<string>>;
+  isLoading: boolean;
 }

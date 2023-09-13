@@ -8,6 +8,7 @@ import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { NotificationWarning } from "@/utils/toastNotifications";
 
 interface PlagiarismCheckerTextareaProps {
   setTextToCheck: (text: string) => void;
@@ -24,11 +25,11 @@ const EXAMPLE_TEXT =
 const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
   setTextToCheck,
 }) => {
-  const { checks, value } = useBoundStore();
   const router = useRouter();
   const { data } = router.query;
   const setText = data ? data.toString() : "";
-  const [textValue, setTextValue] = useState(setText);
+  const [textValue, setTextValue] = useState("");
+  
   useEffect(() => {
     setTextValue(setText);
     setTextToCheck(setText);
@@ -40,6 +41,8 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
     const wordsCount = newTextValue.split(/\s+/);
     if (wordsCount.length >= 20) {
       setTextToCheck(newTextValue); // Set the text in setTextToCorrect
+    } else {
+      NotificationWarning("Should have more than 20 words.");
     }
   };
 
@@ -49,13 +52,13 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
         className="!text-transparent caret-white absolute inset-0 bg-transparent w-full max-h-[250px] md:max-h-[500px] h-max md:h-screen outline-none resize-none p-5 text-base lg:text-lg"
         spellCheck={false}
       >
-        <Highlighter
+        {/* <Highlighter
           searchWords={getSearchWords(checks)}
           autoEscape={false}
           textToHighlight={value}
           highlightTag={HighlightedText}
           caseSensitive={true}
-        />
+        /> */}
       </div>
       <Textarea
         onChange={handleTextareaChange}
@@ -64,13 +67,6 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-      {value.length <= 0 && (
-        <ExampleTextButton
-          exampleText={EXAMPLE_TEXT}
-          additionalSetState={setTextToCheck}
-          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
-        />
-      )}
     </div>
   );
 };

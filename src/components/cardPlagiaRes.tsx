@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Badge, Card } from "antd";
 import { extractHighlightedTextByWordsTT } from "@/utils/highlithText";
 import { Typography } from "antd";
 const { Paragraph } = Typography;
@@ -32,7 +32,7 @@ export const CardPlagia: React.FC<DataType> = ({
       >
         {/* Render the content for each match here */}
         <div>
-          <p>Percent: {match.percent}</p>
+          <Badge.Ribbon text={match.percent} color="red" />
 
           <ul>
             {match.highlight.map((highlight: any, highlightIndex: number) => (
