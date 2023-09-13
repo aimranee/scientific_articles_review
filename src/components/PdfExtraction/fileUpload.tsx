@@ -1,11 +1,28 @@
 import React, { Fragment, useEffect, useState } from "react";
+import TextSummarizerIcon from "../../public/text-summarizer-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faListCheck,
+  faSpellCheck,
+  faBook,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   InboxOutlined,
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
+  DownloadOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
-import { Upload, Typography, Card, Skeleton, FloatButton } from "antd";
+import {
+  Upload,
+  Typography,
+  Card,
+  Skeleton,
+  FloatButton,
+  Tooltip,
+  Button,
+} from "antd";
 import axios from "axios";
 import { type FC } from "react";
 const { Title, Paragraph } = Typography;
@@ -61,9 +78,14 @@ const FileUpload: FC = () => {
             if (current.hasOwnProperty(key)) {
               if (property === "abstract") {
                 const title = (
-                  <Card style={{ marginTop: 16 }} loading={loading}>
+                  <Card
+                    className=" bg-white dark:bg-gray-1 "
+                    style={{ marginTop: 16 }}
+                    loading={loading}
+                  >
                     <Skeleton loading={loading} active>
                       <Typography.Title
+                        className="dark:text-white "
                         editable
                         level={4}
                         style={{ margin: 0 }}
@@ -85,7 +107,11 @@ const FileUpload: FC = () => {
         // );
         if (property === "article-title") {
           const bigTitle = (
-            <Title style={{ marginTop: 30 }} level={2}>
+            <Title
+              className=" text-text-gray dark:text-white"
+              style={{ marginTop: 30 }}
+              level={2}
+            >
               <Skeleton loading={loading} active>
                 "{current}"
               </Skeleton>
@@ -97,6 +123,7 @@ const FileUpload: FC = () => {
         if (property === "p") {
           const p = (
             <Card
+              className=" bg-white dark:bg-gray-1 "
               style={{ marginTop: 16 }}
               actions={[
                 <Link
@@ -107,10 +134,12 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <SettingOutlined
-                    key="setting"
-                    onClick={() => handleSettingClick(current)}
-                  />
+                  {" "}
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faSpellCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -120,10 +149,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleEditClick(current)}
-                  />
+                  <Tooltip title="check vocabulary">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faBook} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -133,15 +163,17 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EllipsisOutlined
-                    key="ellipsis"
-                    onClick={() => handleEllipsisClick(current)}
-                  />
+                  <Tooltip title="check plagiarism">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faListCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
               ]}
             >
               <Skeleton loading={loading} active>
                 <Paragraph
+                  className=" text-text-gray dark:text-white"
                   editable={{
                     autoSize: { maxRows: 5, minRows: 3 },
                   }}
@@ -190,8 +222,17 @@ const FileUpload: FC = () => {
         if (property === "title") {
           if (current === "-") current = "Abstract";
           const title = (
-            <Card style={{ marginTop: 16 }} loading={loading}>
-              <Typography.Title editable level={4} style={{ margin: 0 }}>
+            <Card
+              className=" bg-white dark:bg-gray-1 "
+              style={{ marginTop: 16 }}
+              loading={loading}
+            >
+              <Typography.Title
+                className=" text-text-gray dark:text-white"
+                editable
+                level={4}
+                style={{ margin: 0 }}
+              >
                 {current}
               </Typography.Title>
             </Card>
@@ -202,6 +243,7 @@ const FileUpload: FC = () => {
         if (property === "_" || property === "p") {
           const p = (
             <Card
+              className=" bg-white dark:bg-gray-1 "
               style={{ marginTop: 16 }}
               actions={[
                 <Link
@@ -212,10 +254,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <SettingOutlined
-                    key="setting"
-                    onClick={() => handleSettingClick(current)}
-                  />
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faSpellCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -225,10 +268,11 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleEditClick(current)}
-                  />
+                  <Tooltip title="check vocabulary ">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faBook} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
                 <Link
                   href={{
@@ -238,15 +282,17 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <EllipsisOutlined
-                    key="ellipsis"
-                    onClick={() => handleEllipsisClick(current)}
-                  />
+                  <Tooltip title="check plagiarism">
+                    <Button onClick={() => handleSettingClick(current)}>
+                      <FontAwesomeIcon icon={faListCheck} />
+                    </Button>
+                  </Tooltip>
                 </Link>,
               ]}
             >
               <Skeleton loading={loading}>
                 <Paragraph
+                  className=" text-text-gray dark:text-white"
                   editable={{
                     autoSize: { maxRows: 5, minRows: 3 },
                   }}
@@ -303,7 +349,7 @@ const FileUpload: FC = () => {
   return (
     <>
       <Dragger {...props}>
-        <p className="text-xl lg:text-3xl text-orange-500 dark:text-yellow-1 font-bold text-center">
+        <p className="text-xl lg:text-3xl text-orange-500 dark:text-yellow-500 font-bold text-center">
           <InboxOutlined />
         </p>
 

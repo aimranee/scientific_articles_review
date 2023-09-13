@@ -18,7 +18,7 @@ const GrammarChecker: FC = () => {
         <Navbar />
 
         <Layout hasSider>
-          <main className="w-full h-max md:h-full flex justify-center items-center px-5 relative">
+          <main className="w-full h-max md:h-full flex justify-center   dark:bg-black items-center px-5 relative">
             <TextareaSection>
               <TextareaSection.Header
                 title={HeaderTitle.GRAMMAR_CHECKER}
