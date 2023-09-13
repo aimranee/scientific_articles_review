@@ -1,19 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
-import TextSummarizerIcon from "../../public/text-summarizer-icon.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListCheck,
   faSpellCheck,
   faBook,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  InboxOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  DownloadOutlined,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
 import {
   Upload,
   Typography,
@@ -40,10 +32,8 @@ const FileUpload: FC = () => {
   const mergedArray = [...front, ...body];
 
   useEffect(() => {
-    // Check Local Storage for the "uploadResult" key
     const storedUploadResult = localStorage.getItem("uploadResult");
     if (storedUploadResult) {
-      // If it exists, parse it from JSON and set it in the state
       setRes(JSON.parse(storedUploadResult));
     }
   }, []);

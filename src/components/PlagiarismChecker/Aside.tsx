@@ -1,5 +1,5 @@
 import { PlagiarismProps } from "@/interfaces";
-import { Progress, Space } from "antd";
+import { Badge, Progress, Space } from "antd";
 import { CardPlagia } from "../cardPlagiaRes";
 const conicColors = {
   "0%": "#87d068",
@@ -15,20 +15,18 @@ const Aside: React.FC<PlagiarismProps> = ({
 }) => {
   return (
     <aside className="w-full lg:w-96 md:max-h-screen bg-white dark:bg-gray-1 text-gray-1 dark:text-white p-5 shadow-lg">
-      <h2 className="text-base lg:text-lg mb-10">Plagiarism Check Results</h2>
+      <h2 className="text-base lg:text-lg mb-15">Plagiarism Check Results</h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>Waiting...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : result ? (
         <div>
           <div>
-            <p>Result Percent: {100 - parseInt(result.percent)}</p>
-
-            <br />
             <div
               style={{
                 marginBottom: "20px",
+                marginTop: "20px",
                 display: "flex",
                 justifyContent: "center",
               }}
@@ -41,14 +39,10 @@ const Aside: React.FC<PlagiarismProps> = ({
                 />
               </Space>
             </div>
-
-            {/* ;<p>Words Count: {result["words_count"]}</p> */}
           </div>
-
           <div
             style={{
-              height: "400px",
-
+              height: "390px",
               overflowY: "scroll",
             }}
           >

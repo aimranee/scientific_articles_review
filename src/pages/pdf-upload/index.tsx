@@ -23,8 +23,7 @@ const PdfUpload: FC = () => {
                   className="bg-yellow-500"
                   content={GrammarCheckerInfo}
                 />
-                <br />
-                <br />
+
                 <FileUpload />
               </TextareaSection>
             </main>
