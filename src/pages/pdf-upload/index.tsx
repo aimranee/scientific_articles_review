@@ -18,8 +18,8 @@ const PdfUpload: FC = () => {
             <main className="w-full h-max md:h-full flex justify-center  dark:bg-black text-white  items-center px-5 relative">
               <TextareaSection>
                 <TextareaSection.Header
-                  title={HeaderTitle.GRAMMAR_CHECKER}
-                  description={HeaderDescription.GRAMMAR_CHECKER}
+                  title={HeaderTitle.FILE_UPLOAD}
+                  description={HeaderDescription.FILE_UPLOAD}
                   className="bg-yellow-500"
                   content={GrammarCheckerInfo}
                 />
