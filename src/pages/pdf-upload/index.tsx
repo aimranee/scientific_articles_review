@@ -5,13 +5,12 @@ import TextareaSection from "@/components/TextareaSection";
 import Navbar from "@/components/Navbar";
 import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import FileUpload from "@/components/PdfExtraction/fileUpload";
-import { Layout, Space } from "antd";
+import { Layout } from "antd";
 
-const { Header, Footer, Sider, Content } = Layout;
 const PdfUpload: FC = () => {
   return (
     <>
-      <div className="flex flex-wrap gap-y-10 md:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-max min-h-screen pb-5 md:pt-0">
+      <div className="flex gap-y-10 md:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-max min-h-screen pb-5 md:pt-0">
         <div id="modal-root"></div>
         <div className="flex flex-col w-full">
           <Navbar />
