@@ -5,7 +5,7 @@ import {
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Upload, Typography, Card, Skeleton } from "antd";
+import { Upload, Typography, Card, Skeleton, FloatButton } from "antd";
 import axios from "axios";
 import { type FC } from "react";
 const { Title, Paragraph } = Typography;
@@ -321,6 +321,8 @@ const FileUpload: FC = () => {
           <Fragment key={index}>{component}</Fragment>
         ))}
       <>{loading ? <Skeleton style={{ marginTop: 30 }} active /> : <></>}</>
+
+      <FloatButton.BackTop />
     </>
   );
 };
