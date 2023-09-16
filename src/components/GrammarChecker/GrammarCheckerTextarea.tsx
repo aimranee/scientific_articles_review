@@ -30,7 +30,6 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   onChange,
   setTextToCorrect,
 }) => {
-  
   const { corrections, value, setValue } = useBoundStore();
   const router = useRouter();
   const { data } = router.query;
