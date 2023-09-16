@@ -30,6 +30,7 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   onChange,
   setTextToCorrect,
 }) => {
+  
   const { corrections, value, setValue } = useBoundStore();
   const router = useRouter();
   const { data } = router.query;
@@ -68,7 +69,6 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
-
       {value.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
