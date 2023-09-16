@@ -56,7 +56,7 @@ const VocabularyCheckerTextarea: FC<VocabularyCheckerTextareaProps> = ({
         <Highlighter
           searchWords={getSearchWords(corrections)}
           autoEscape={false}
-          textToHighlight={value}
+          textToHighlight={textValue}
           highlightTag={HighlightedText}
           caseSensitive={true}
         />

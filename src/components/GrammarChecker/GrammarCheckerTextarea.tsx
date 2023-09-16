@@ -30,21 +30,21 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
   onChange,
   setTextToCorrect,
 }) => {
-  const { corrections, value } = useBoundStore();
+  const { corrections, value, setValue } = useBoundStore();
   const router = useRouter();
   const { data } = router.query;
   const setText = data ? data.toString() : "";
-  const [textValue, setTextValue] = useState(setText);
+
   useEffect(() => {
-    setTextValue(setText);
+    setValue(setText);
     setTextToCorrect(setText);
   }, []);
 
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newTextValue = e.target.value;
-    setTextValue(newTextValue);
-    onChange(e); // Pass the event up to the parent component if needed
-    setTextToCorrect(newTextValue); // Set the text in setTextToCorrect
+    onChange(e);
+    setTextToCorrect(newTextValue);
+    setValue(newTextValue);
   };
 
   return (
@@ -63,13 +63,13 @@ const GrammarCheckerTextarea: FC<GrammarCheckerTextareaProps> = ({
       </div>
       <Textarea
         onChange={handleTextareaChange}
-        value={textValue}
+        value={value}
         name="text"
         className="relative md:!max-h-[500px] !bg-transparent !p-0 !pt-5 !pl-0"
         autofocus={isDesktopView()}
       />
 
-      {value.length <= 0 && setText.length <= 0 && (
+      {value.length <= 0 && (
         <ExampleTextButton
           exampleText={EXAMPLE_TEXT}
           additionalSetState={setTextToCorrect}
