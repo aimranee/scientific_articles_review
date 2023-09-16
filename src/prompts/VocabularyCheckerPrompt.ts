@@ -6,6 +6,7 @@ const SYSTEM_MESSAGE = `
   If the given text has no health phenomena, you should answer me with an empty array of corrections.
   You must create a corrections list with the phenomenal names you find in the given text. Don't verify the text in a single verification, you must create a list unless you find only one phenomenal.
   In the "result" field, the first element is the sentence or paragraph of a phenomenal, and the second element is the name you find in the glossary of health for the phenomenal, and the third element is the small definition you find in the glossary of health for the phenomenal. So if you find a phenomenal in the user input, all elements must be completed. If you don't find any phenomenal, just don't fill in the "result" field.
+  
   Consider this example of how you should answer me in JSON format:
   {
     "corrections": {

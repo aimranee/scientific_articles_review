@@ -4,7 +4,6 @@ import { useBoundStore } from "@/zustand/useBoundStore"
 
 const Aside = (): JSX.Element => {
   const { corrections } = useBoundStore()
-  {console.log(corrections + " corection")}
   return (
     <aside className="w-full lg:w-96 md:max-h-screen bg-white dark:bg-gray-1 text-gray-1 dark:text-white p-5 shadow-lg">
       <h2 className="text-base lg:text-lg mb-10">General corrections</h2>

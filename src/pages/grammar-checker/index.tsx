@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import { useCleaner } from "@/hooks/useCleaner";
 import { type FC } from "react";
-import { Layout, } from "antd";
+import { Layout } from "antd";
 
 const GrammarChecker: FC = () => {
   useCleaner();

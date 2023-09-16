@@ -30,7 +30,6 @@ export const CardPlagia: React.FC<DataType> = ({
         title={match.url}
         extra={<a href={match.url}>More</a>}
       >
-        {/* Render the content for each match here */}
         <div>
           <Badge.Ribbon text={match.percent} color="red" />
 
