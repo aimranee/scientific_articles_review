@@ -20,11 +20,6 @@ import { type FC } from "react";
 const { Title, Paragraph } = Typography;
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import Link from "next/link";
-import { useBoundStore } from "@/zustand/useBoundStore";
-
-interface SetTextButtonProps {
-  additionalSetState?: (text: string) => void;
-}
 
 const FileUpload: FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -35,7 +30,6 @@ const FileUpload: FC = () => {
   const body = res ? extractBody(res) : [];
   const front = res ? extractFront(res) : [];
   const mergedArray = [...front, ...body];
-  const { setValue } = useBoundStore();
 
   useEffect(() => {
     const storedUploadResult = localStorage.getItem("uploadResult");
@@ -43,6 +37,20 @@ const FileUpload: FC = () => {
       setRes(JSON.parse(storedUploadResult));
     }
   }, []);
+
+  const handleSettingClick = (current: any) => {
+    // Handle the click for the Setting icon
+  };
+
+  const handleEditClick = (current: any) => {
+    // Handle the click for the Edit icon
+    // console.log("Edit icon clicked for:", current);
+  };
+
+  const handleEllipsisClick = (current: any) => {
+    // Handle the click for the Ellipsis icon
+    // console.log("Ellipsis icon clicked for:", current);
+  };
 
   function extractFront(obj: any) {
     const components: JSX.Element[] = [];
@@ -116,8 +124,8 @@ const FileUpload: FC = () => {
                   }}
                 >
                   {" "}
-                  <Tooltip title="check ">
-                    <Button>
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faSpellCheck} />
                     </Button>
                   </Tooltip>
@@ -131,7 +139,7 @@ const FileUpload: FC = () => {
                   }}
                 >
                   <Tooltip title="check vocabulary">
-                    <Button>
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faBook} />
                     </Button>
                   </Tooltip>
@@ -145,7 +153,7 @@ const FileUpload: FC = () => {
                   }}
                 >
                   <Tooltip title="check plagiarism">
-                    <Button>
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faListCheck} />
                     </Button>
                   </Tooltip>
@@ -235,8 +243,8 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <Tooltip title="check Grammar">
-                    <Button>
+                  <Tooltip title="check grammar">
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faSpellCheck} />
                     </Button>
                   </Tooltip>
@@ -250,7 +258,7 @@ const FileUpload: FC = () => {
                   }}
                 >
                   <Tooltip title="check vocabulary ">
-                    <Button>
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faBook} />
                     </Button>
                   </Tooltip>
@@ -264,7 +272,7 @@ const FileUpload: FC = () => {
                   }}
                 >
                   <Tooltip title="check plagiarism">
-                    <Button>
+                    <Button onClick={() => handleSettingClick(current)}>
                       <FontAwesomeIcon icon={faListCheck} />
                     </Button>
                   </Tooltip>
@@ -355,3 +363,13 @@ const FileUpload: FC = () => {
 };
 
 export default FileUpload;
+
+// const [componentData, setComponentData] = useState(
+//   Array(mergedArray.length).fill("")
+// );
+
+// const handleComponentChange = (index: any, newValue: any) => {
+//   const newData = [...componentData];
+//   newData[index] = newValue;
+//   setComponentData(newData);
+// };
