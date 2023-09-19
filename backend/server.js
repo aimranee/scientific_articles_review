@@ -80,7 +80,7 @@ app.post("/plagiarism-check", async (req, res) => {
   };
 
   try {
-    //console.log("222  req "+req+ " res"+res.result["words_count"])
+    console.log("222  req " + req + " res" + res.result["words_count"]);
 
     const response = await axios.post(burp0_url, burp0_data, {
       headers: burp0_headers,
