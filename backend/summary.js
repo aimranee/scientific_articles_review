@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const fsPromises = require("fs").promises; // Import fs.promises
+const zlib = require("zlib");
+
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const cors = require("cors");
@@ -25,7 +28,7 @@ app.use(
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Folder where files will be saved
+    cb(null, "uploads"); // Folder where files will be saved
   },
   filename: (req, file, cb) => {
     // const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -35,6 +38,31 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+const processPage = async (data) => {
+  const pageText = data.text;
+  const pageTextLower = pageText.toLowerCase();
+
+  // console.log("pageTextLower " + pageIndex + ": " + pageTextLower);
+
+  const response = await openai.createCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content: "You are a helpful research assistant.",
+      },
+      { role: "user", content: `Summarize this: ${pageTextLower}` },
+    ],
+  });
+
+  const pageSummary = response.choices[0].message.content;
+  pdfSummaryText += pageSummary + "\n";
+  // console.log("summary " + pageIndex + ": " + pageSummary);
+
+  // Recursively process the next page
+};
+
 app.post("/summarize-pdf", upload.single("file-upload"), async (req, res) => {
   const filePath = req.file.path;
   console.log("file " + filePath);
@@ -47,36 +75,36 @@ app.post("/summarize-pdf", upload.single("file-upload"), async (req, res) => {
       const data = await pdf(dataBuffer);
 
       let pdfSummaryText = "";
-      console.log("ttttttttt" + data.numpages);
-      for (let page_num = 0; page_num < data.numpages; page_num++) {
-        const pageText = data.text;
-        const pageTextLower = pageText.toLowerCase();
+      // console.log("ttttttttt" + data.numpages);
+      // Assuming data.pages is an array of page objects, and each page object has a "text" property
 
-        console.log("pageTextLower 22 " + pageTextLower);
-        const response = await openai.createCompletion({
-          model: "gpt-3.5-turbo",
-          max_tokens: 512,
-          temperature: 0,
-          messages: [
-            {
-              role: "system",
-              content: "You are a helpful research assistant.",
-            },
-            { role: "user", content: `Summarize this: ${pageTextLower}` },
-          ],
-        });
+      // Start processing from the first page
+      processPage(data);
 
-        const pageSummary = response.send(
-          completion.data.choices[0].message.content
-        );
-        pdfSummaryText += pageSummary + "\n";
-        console.log("summry " + pageSummary);
-      }
-
-      const pdfSummaryFilePath = filePath.replace(".pdf", "_summary.txt");
+      const pdfSummaryFilePath = filePath.replace(".pdf", "_summaryuu.txt");
       fs.writeFileSync(pdfSummaryFilePath, pdfSummaryText);
+      // console.log("pdfSummaryText" + );
+      const summaryContent = await fsPromises.readFile(
+        pdfSummaryFilePath,
+        "utf8"
+      );
+      pdf(dataBuffer)
+        .then((pdfSummaryText) => {
+          // Access the extracted text content
+          const text = pdfSummaryText;
+          console.log("xaaaaaaaaatext text" + text);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      // console.log(fs.readFileSync(filePath).toString()); // Log the file contents
 
-      res.json({ success: true, summaryFilePath: data });
+      res.json({
+        success: true,
+        data: data,
+        summaryFilePath: summaryContent,
+        req: req.file,
+      });
     } else {
       // Handle the case where filePath is missing or invalid
       res.status(400).json({ success: false, error: "Invalid filePath" });
