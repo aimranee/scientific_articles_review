@@ -130,7 +130,7 @@ const FileUpload: FC = () => {
                   }}
                 >
                   {" "}
-                  <Tooltip title="check ">
+                  <Tooltip title="check grammar">
                     <Button>
                       <FontAwesomeIcon icon={faSpellCheck} />
                     </Button>
@@ -263,7 +263,7 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  <Tooltip title="check Grammar">
+                  <Tooltip title="check grammar">
                     <Button>
                       <FontAwesomeIcon icon={faSpellCheck} />
                     </Button>
