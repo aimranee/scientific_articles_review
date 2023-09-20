@@ -22,7 +22,6 @@ const PlagiarismCheckerTextarea: FC<PlagiarismCheckerTextareaProps> = ({
   const setText = data ? data.toString() : "";
   const [textValue, setTextValue] = useState("");
   
-  
   useEffect(() => {
     setTextValue(setText);
     setTextToCheck(setText);
