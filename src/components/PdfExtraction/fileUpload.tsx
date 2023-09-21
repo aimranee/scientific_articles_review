@@ -31,7 +31,7 @@ const FileUpload: FC = () => {
   const { Dragger } = Upload;
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>(null);
-
+  let n = 0;
   const body = res ? extractBody(res) : [];
   const front = res ? extractFront(res) : [];
   const mergedArray = [...front, ...body];
@@ -58,8 +58,11 @@ const FileUpload: FC = () => {
           if (key !== "$" && key !== "body" && key !== "back") {
             if (current.hasOwnProperty(key)) {
               if (property === "abstract") {
+                n++;
+
                 const title = (
                   <Card
+                    key={n}
                     className=" bg-white dark:bg-gray-1 "
                     style={{ marginTop: 16 }}
                     loading={loading}
@@ -87,6 +90,8 @@ const FileUpload: FC = () => {
         //   "LOG1 => current : " + current + "  property : " + property
         // );
         if (property === "article-title") {
+          n++;
+
           const bigTitle = (
             <Title
               className=" text-text-gray dark:text-white"
@@ -94,7 +99,7 @@ const FileUpload: FC = () => {
               level={2}
             >
               <Skeleton loading={loading} active>
-                "{current}"
+                {current}
               </Skeleton>
             </Title>
           );
@@ -102,12 +107,15 @@ const FileUpload: FC = () => {
         }
 
         if (property === "p") {
+          n++;
+
           const p = (
             <Card
               className=" bg-white dark:bg-gray-1 "
               style={{ marginTop: 16 }}
               actions={[
                 <Link
+                  key={n}
                   href={{
                     pathname: "/text-summarizer",
                     query: {
@@ -122,6 +130,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/grammar-checker",
                     query: {
@@ -129,7 +138,6 @@ const FileUpload: FC = () => {
                     },
                   }}
                 >
-                  {" "}
                   <Tooltip title="check grammar">
                     <Button>
                       <FontAwesomeIcon icon={faSpellCheck} />
@@ -137,6 +145,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/vocabulary-checker",
                     query: {
@@ -151,6 +160,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/plagiarism-checker",
                     query: {
@@ -236,12 +246,14 @@ const FileUpload: FC = () => {
         }
 
         if (property === "_" || property === "p") {
+          n++;
           const p = (
             <Card
               className=" bg-white dark:bg-gray-1 "
               style={{ marginTop: 16 }}
               actions={[
                 <Link
+                  key={n}
                   href={{
                     pathname: "/text-summarizer",
                     query: {
@@ -256,6 +268,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/grammar-checker",
                     query: {
@@ -270,6 +283,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/vocabulary-checker",
                     query: {
@@ -284,6 +298,7 @@ const FileUpload: FC = () => {
                   </Tooltip>
                 </Link>,
                 <Link
+                  key={n}
                   href={{
                     pathname: "/plagiarism-checker",
                     query: {
