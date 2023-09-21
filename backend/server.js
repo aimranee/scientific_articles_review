@@ -6,7 +6,8 @@ const axios = require("axios");
 const fs = require("fs");
 const xml2js = require("xml2js");
 const app = express();
-
+const NetworkSpeed = require("network-speed"); // ES5
+const testNetworkSpeed = new NetworkSpeed();
 app.use(
   bodyParser.text(),
   cors({
@@ -75,12 +76,11 @@ app.post("/plagiarism-check", async (req, res) => {
     plagchecker_locale: "en",
     product_paper_type: "1",
     title: "",
-
     text: req.body,
   };
 
   try {
-    console.log("222  req " + req + " res" + res.result["words_count"]);
+    //console.log("222  req "+req+ " res"+res.result["words_count"])
 
     const response = await axios.post(burp0_url, burp0_data, {
       headers: burp0_headers,
@@ -88,25 +88,13 @@ app.post("/plagiarism-check", async (req, res) => {
       params: burp0_cookies,
       responseType: "json",
     });
-    // console.log("222   response 2 " + response.data);
 
     const result = response.data;
-    // console.log("\n[!] Word count : " + result.words_count);
-    // console.log("\n[!] Turnitin index : " + (100 - parseFloat(result.percent)));
-    // console.log("\n[!] Matches : " + result.matches);
-
-    // console.log("\n[!] Matches:");
-    // result["matches"].forEach((element) => {
-    //   console.log("\n[!] Matches : " + JSON.stringify(element));
-    // });
-    // console.log("\n Matches : wtfffffffffffffff");
-
-    // console.log("\n[!] Matches : " + result["matches"]);
 
     return res.status(200).json({
       result: result,
       msg: "File uploaded and processed",
-    }); // Send the result back to the client
+    });
   } catch (error) {
     console.error("Error while checking plagiarism:", error);
     res
@@ -117,11 +105,9 @@ app.post("/plagiarism-check", async (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Folder where files will be saved
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    // const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    // const extname = path.extname(file.originalname);
     cb(null, file.originalname);
   },
 });
@@ -131,45 +117,98 @@ const upload = multer({ storage: storage });
 app.post("/upload", upload.single("file-upload"), async (req, res) => {
   const uploadedFilePath = req.file.path;
 
-  try {
-    const response = await axios.post(
-      "http://cermine.ceon.pl/extract.do",
-      fs.readFileSync(uploadedFilePath),
-      {
-        headers: {
-          "Content-Type": "application/binary",
-        },
-      }
-    );
-
-    fs.unlinkSync(uploadedFilePath); // Remove the temporary uploaded file
-
-    xml2js.parseString(response.data, (err, result) => {
-      if (err) {
-        console.error("Error parsing XML:", err);
-      } else {
-        const modifiedResult = cleanUpText(result);
-        return res.status(200).json({
-          result: modifiedResult,
-          msg: "File uploaded and processed",
+  // try {
+  //   const baseUrl = "https://eu.httpbin.org/stream-bytes/500000";
+  //   const fileSizeInBytes = 500000;
+  //   const speed = await testNetworkSpeed.checkDownloadSpeed(
+  //     baseUrl,
+  //     fileSizeInBytes
+  //   );
+  //   // console.log("speed : " + speed.mbps);
+  //   // res.json({ downloadSpeed: speed });
+  //   if (speed.mbps >= 1) {
+      try {
+        const response = await axios.post(
+          "http://cermine.ceon.pl/extract.do",
+          fs.readFileSync(uploadedFilePath),
+          {
+            headers: {
+              "Content-Type": "application/binary",
+            },
+          }
+        );
+        fs.unlinkSync(uploadedFilePath); // Remove the temporary uploaded file
+        xml2js.parseString(response.data, (err, result) => {
+          if (err) {
+            console.error("Error parsing XML:", err);
+          } else {
+            const modifiedResult = cleanUpText(result);
+            return res.status(200).json({
+              result: modifiedResult,
+              msg: "File uploaded and processed",
+            });
+          }
+        });
+      } catch (error) {
+        console.error("Error uploading or processing the file:", error);
+        return res.status(500).json({
+          result: false,
+          msg: "Error uploading or processing the file",
         });
       }
-    });
+    // } else {
+    //   console.log("rrrr network");
+  //   }
+  // } catch (error) {
+  //   console.error("Error uploading or processing the file:", error);
+  //   return res.status(500).json({ error: "Error network" });
+  // }
+});
+
+app.get("/download-speed", async (req, res) => {
+  try {
+    const baseUrl = "https://eu.httpbin.org/stream-bytes/500000";
+    const fileSizeInBytes = 500000;
+    const speed = await testNetworkSpeed.checkDownloadSpeed(
+      baseUrl,
+      fileSizeInBytes
+    );
+    res.json({ downloadSpeed: speed });
   } catch (error) {
-    console.error("Error uploading or processing the file:", error);
-    return res.status(500).json({
-      result: false,
-      msg: "Error uploading or processing the file",
-    });
+    console.error("Error measuring download speed:", error);
+    res.status(500).json({ error: "Error network" });
+  }
+});
+
+app.get("/upload-speed", async (req, res) => {
+  try {
+    const options = {
+      hostname: "www.google.com",
+      port: 80,
+      path: "/catchers/544b09b4599c1d0200000289",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const fileSizeInBytes = 2000000;
+    const speed = await testNetworkSpeed.checkUploadSpeed(
+      options,
+      fileSizeInBytes
+    );
+    res.json({ uploadSpeed: speed });
+  } catch (error) {
+    console.error("Error measuring upload speed:", error);
+    res.status(500).json({ error: "Error measuring upload speed" });
   }
 });
 
 function cleanUpText(obj) {
   if (typeof obj === "string") {
-    return obj.replace(/[\r\n\t]+/g, " "); // Replace newline and tab characters with spaces
+    return obj.replace(/[\r\n\t]+/g, " ");
   } else if (typeof obj === "object") {
     for (const key in obj) {
-      obj[key] = cleanUpText(obj[key]); // Recursively clean up object properties
+      obj[key] = cleanUpText(obj[key]);
     }
   }
   return obj;
