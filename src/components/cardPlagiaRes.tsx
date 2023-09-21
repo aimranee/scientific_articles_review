@@ -15,13 +15,15 @@ interface DataType {
   textareaContent: string;
   loading: boolean;
 }
-
+const cardTitleStyle = {
+  // color: isDarkTheme ? "white" : "black", // Change the title color based on the theme
+};
 export const CardPlagia: React.FC<DataType> = ({
   matches,
   textareaContent,
   loading,
 }) => (
-  <Card title="Result of cheking">
+  <Card title="Result of cheking" className={"dark:text-white"}>
     {matches.map((match, index) => (
       <Card
         style={{ marginTop: "20px", marginBottom: "20px" }}

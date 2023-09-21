@@ -11,6 +11,10 @@ import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import { useCleaner } from "@/hooks/useCleaner";
 import { type FC } from "react";
 import axios from "axios";
+import {
+  NotificationFailure,
+  NotificationWarning,
+} from "@/utils/toastNotifications";
 
 const PlagiarismChecker: FC = () => {
   useCleaner();
@@ -26,10 +30,14 @@ const PlagiarismChecker: FC = () => {
   }, [textareaContent]);
 
   const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      setError("");
+    setIsLoading(true);
+    const timeout = setTimeout(() => {
+      NotificationWarning(
+        "Due to the high traffic, the response may take a few seconds"
+      );
+    }, 10000);
 
+    try {
       const response = await axios.post(
         "http://localhost:8080/plagiarism-check",
         textareaContent,
@@ -47,8 +55,12 @@ const PlagiarismChecker: FC = () => {
       }
     } catch (error) {
       setError("Error fetching data");
+      NotificationFailure(
+        "Due to connectivity issuesSwitch to a stronger internet connection for stability."
+      );
     } finally {
       setIsLoading(false);
+      clearTimeout(timeout);
     }
   };
 
