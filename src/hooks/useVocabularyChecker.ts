@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   createSystemMessage,
   createUserMessage,
-} from "@/prompts/vocabularyCheckerPrompt";
+} from "@/prompts/vocCheckerPrompt";
 
 import { useBoundStore } from "@/zustand/useBoundStore";
 import { useChatGPT } from "./useChatGPT";
