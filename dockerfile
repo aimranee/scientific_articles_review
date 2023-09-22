@@ -53,5 +53,5 @@ COPY --from=backend /PAPER_CHECKER/backend ./
 EXPOSE 3000
 
 # Define the command to start your Next.js application
-CMD [ "npm", "run", "dev" ]
-# CMD [ "npm", "run", "start" ]
+# CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
