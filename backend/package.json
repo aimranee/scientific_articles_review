@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -16,6 +19,7 @@
     "cors": "^2.8.5",
     "fs": "^0.0.1-security",
     "network-speed": "^2.1.1",
+    "nodemon": "^3.0.1",
     "xml2js": "^0.6.2"
   }
 }
