@@ -8,6 +8,7 @@ const xml2js = require("xml2js");
 const app = express();
 const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
+
 app.use(
   bodyParser.text(),
   cors({
@@ -17,7 +18,6 @@ app.use(
 );
 
 app.post("/plagiarism-check", async (req, res) => {
-
   const burp0_url = "https://papersowl.com:443/plagiarism-checker-send-data";
   const burp0_cookies = {
     PHPSESSID: "qjc72e3vvacbtn4jd1af1k5qn1",
@@ -78,7 +78,6 @@ app.post("/plagiarism-check", async (req, res) => {
   };
 
   try {
-
     const response = await axios.post(burp0_url, burp0_data, {
       headers: burp0_headers,
       withCredentials: true,
