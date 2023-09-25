@@ -1,6 +1,6 @@
 import homeText from "../utils/homeText.json";
-import links from "../utils/grammarGateLinks";
-import { Item } from "../components/GrammarGateItem";
+import links from "../utils/healthCheckerLinks";
+import { Item } from "../components/healthCheckerItem";
 import IconWrapper from "@/components/IconWrapper";
 import ThemeButton from "@/components/ThemeButton";
 

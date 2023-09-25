@@ -1,5 +1,5 @@
-import { Item } from "./GrammarGateItem";
-import links from "../utils/grammarGateLinks";
+import { Item } from "./healthCheckerItem";
+import links from "../utils/healthCheckerLinks";
 import IconWrapper from "./IconWrapper";
 import { useRouter } from "next/router";
 import { type FC } from "react";

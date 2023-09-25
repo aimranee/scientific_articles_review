@@ -5,6 +5,7 @@ import TextSummarizerIcon from "../../public/text-summarizer-icon.svg";
 import vocabularyChecker from "../../public/vocubary-icon.svg";
 
 import upload from "../../public/upload-icon.svg";
+import TranslatorIcon from "../../public/translator-icon.svg";
 const links = [
   {
     name: "Grammar Checker",
@@ -41,6 +42,13 @@ const links = [
     icon: upload,
     backgroundColor: "bg-yellow-500",
     borderColor: "!border-b-yellow-500",
+  },
+  {
+    name: "Translator",
+    href: "/translator",
+    icon: TranslatorIcon,
+    backgroundColor: "bg-red-500",
+    borderColor: "!border-b-red-500",
   },
 ];
 
