@@ -8,6 +8,7 @@ const xml2js = require("xml2js");
 const app = express();
 const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
+
 app.use(
   bodyParser.text(),
   cors({
@@ -17,8 +18,6 @@ app.use(
 );
 
 app.post("/plagiarism-check", async (req, res) => {
-  // console.log("test" + req.body);
-
   const burp0_url = "https://papersowl.com:443/plagiarism-checker-send-data";
   const burp0_cookies = {
     PHPSESSID: "qjc72e3vvacbtn4jd1af1k5qn1",
@@ -48,7 +47,6 @@ app.post("/plagiarism-check", async (req, res) => {
     AppleBannercookie_hide_header_banner: "1",
     COOKIE_PLAGIARISM_CHECKER_TERMS: "1",
     plagiarism_checker_progress_state: "1",
-    // Add other required cookies here...
   };
 
   const burp0_headers = {
@@ -80,8 +78,6 @@ app.post("/plagiarism-check", async (req, res) => {
   };
 
   try {
-    //console.log("222  req "+req+ " res"+res.result["words_count"])
-
     const response = await axios.post(burp0_url, burp0_data, {
       headers: burp0_headers,
       withCredentials: true,
@@ -104,9 +100,6 @@ app.post("/plagiarism-check", async (req, res) => {
 });
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
@@ -116,53 +109,35 @@ const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("file-upload"), async (req, res) => {
   const uploadedFilePath = req.file.path;
-
-  // try {
-  //   const baseUrl = "https://eu.httpbin.org/stream-bytes/500000";
-  //   const fileSizeInBytes = 500000;
-  //   const speed = await testNetworkSpeed.checkDownloadSpeed(
-  //     baseUrl,
-  //     fileSizeInBytes
-  //   );
-  //   // console.log("speed : " + speed.mbps);
-  //   // res.json({ downloadSpeed: speed });
-  //   if (speed.mbps >= 1) {
-      try {
-        const response = await axios.post(
-          "http://cermine.ceon.pl/extract.do",
-          fs.readFileSync(uploadedFilePath),
-          {
-            headers: {
-              "Content-Type": "application/binary",
-            },
-          }
-        );
-        fs.unlinkSync(uploadedFilePath); // Remove the temporary uploaded file
-        xml2js.parseString(response.data, (err, result) => {
-          if (err) {
-            console.error("Error parsing XML:", err);
-          } else {
-            const modifiedResult = cleanUpText(result);
-            return res.status(200).json({
-              result: modifiedResult,
-              msg: "File uploaded and processed",
-            });
-          }
-        });
-      } catch (error) {
-        console.error("Error uploading or processing the file:", error);
-        return res.status(500).json({
-          result: false,
-          msg: "Error uploading or processing the file",
+  try {
+    const response = await axios.post(
+      "http://cermine.ceon.pl/extract.do",
+      fs.readFileSync(uploadedFilePath),
+      {
+        headers: {
+          "Content-Type": "application/binary",
+        },
+      }
+    );
+    fs.unlinkSync(uploadedFilePath);
+    xml2js.parseString(response.data, (err, result) => {
+      if (err) {
+        console.error("Error parsing XML:", err);
+      } else {
+        const modifiedResult = cleanUpText(result);
+        return res.status(200).json({
+          result: modifiedResult,
+          msg: "File uploaded and processed",
         });
       }
-    // } else {
-    //   console.log("rrrr network");
-  //   }
-  // } catch (error) {
-  //   console.error("Error uploading or processing the file:", error);
-  //   return res.status(500).json({ error: "Error network" });
-  // }
+    });
+  } catch (error) {
+    console.error("Error uploading or processing the file:", error);
+    return res.status(500).json({
+      result: false,
+      msg: "Error uploading or processing the file",
+    });
+  }
 });
 
 app.get("/download-speed", async (req, res) => {
