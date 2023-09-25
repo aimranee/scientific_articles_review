@@ -22,6 +22,9 @@ const ModalContent: FC<ModalContentProps> = ({ content }) => {
               } ${
                 router.pathname === "/text-summarizer" &&
                 "text-purple-1 dark:text-purple-400"
+              }${
+                router.pathname === "/translator" &&
+                "text-red-500 dark:text-red-400"
               }`}
             >
               {key}

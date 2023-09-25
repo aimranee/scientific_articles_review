@@ -4,6 +4,7 @@ export enum HeaderTitle {
   VOCABULARY_CHECKER = "Vocabulary",
   PLAGIARIM_CHECKER = "Plagiarim",
   FILE_UPLOAD = "File Upload",
+  TRANSLATOR = "Translator",
 }
 
 export enum HeaderDescription {
@@ -12,12 +13,27 @@ export enum HeaderDescription {
   VOCABULARY_CHECKER = "Write your text and let us check your vocabulary!",
   PLAGIARIM_CHECKER = "Write your text and let us check your the plagialism!",
   FILE_UPLOAD = "This is your content in your file!",
+  TRANSLATOR = "Choose a language and translate your text!",
 }
+export const AUTO_LANGUAGE = "Auto";
 
+export enum Languages {
+  ENGLISH = "English",
+  SPANISH = "Spanish",
+  FRENCH = "French",
+  GERMAN = "German",
+  ITALIAN = "Italian",
+  PORTUGUESE = "Portuguese",
+  RUSSIAN = "Russian",
+  CHINESE = "Chinese",
+  JAPANESE = "Japanese",
+  KOREAN = "Korean",
+}
 export enum ResponseProperties {
   CORRECTIONS = "corrections",
   SUMMARY = "summary",
   VOCABULARY = "vocabulary",
   PLAGIARIM = "plagiarism",
   FILE_UPLOAD = "file upload",
+  TRANSLATION = "translation",
 }
