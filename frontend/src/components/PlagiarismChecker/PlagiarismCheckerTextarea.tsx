@@ -1,9 +1,4 @@
 import { type FC, type ChangeEvent } from "react";
-import HighlightedText from "../HighlightedText";
-import { useBoundStore } from "@/zustand/useBoundStore";
-import Highlighter from "react-highlight-words";
-import ExampleTextButton from "../ExampleTextButton";
-import { ChecksProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
 import React, { useEffect, useState } from "react";

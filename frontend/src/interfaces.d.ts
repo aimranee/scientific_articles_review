@@ -175,6 +175,10 @@ interface RessProps {
   res: string;
 }
 
+interface RssProps {
+  res: string;
+}
+
 interface PlagiarismCheckerTextareaWrapperProps {
   textareaContent: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
