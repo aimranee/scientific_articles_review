@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import FileUpload from "@/components/PdfExtraction/fileUpload";
 import { Layout } from "antd";
+import Aside from "@/components/PdfExtraction/Aside";
 
 const PdfUpload: FC = () => {
   return (
@@ -14,7 +15,7 @@ const PdfUpload: FC = () => {
         <div id="modal-root"></div>
         <div className="flex flex-col w-full">
           <Navbar />
-          <Layout>
+          <Layout hasSider>
             <main className="w-full h-max md:h-full flex justify-center  dark:bg-black text-white  items-center px-5 relative">
               <TextareaSection>
                 <TextareaSection.Header
