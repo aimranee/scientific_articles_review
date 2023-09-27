@@ -28,6 +28,10 @@
       "title": "Import PDF",
       "description": "Our PDF import tool allows you to easily upload and import your PDF documents section by section. Once uploaded, you can efficiently work on individual sections, making it simple to perform tasks like grammar checking, plagiarism detection, and summary generation on specific parts of your paper. Enhance the quality and originality of your content with our intuitive PDF import feature.",
       "link": "/pdf-import"
+    } ,{
+      "title": "Translator",
+      "description": "Our translator leverages the power of ChatGPT to provide fast and accurate translations in multiple languages. Simply enter your text, select your target language, and let our translator do the rest.",
+      "link": "/translator"
     }
 
   ]

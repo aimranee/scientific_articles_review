@@ -25,7 +25,9 @@ const RepositoryButton = () => {
         }${
           router.pathname === "/vocabulary-checker" &&
           "text-yellow-500 dark:text-yellow-500"
-        } `}
+        } ${
+          router.pathname === "/translator" && "text-red-500 dark:text-red-400"
+        }`}
         target="_blank"
       >
         <span className="flex justify-center items-center gap-2">

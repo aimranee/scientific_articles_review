@@ -133,7 +133,7 @@ export type SetSummaryProps = (newSummary: string) => void;
 export interface UseChatGPTProps {
   initialPrompt: ChatGPTMessageProps;
   customProperty: ResponseProperties;
-  customSetState: AddCorrectionProps | SetSummaryProps;
+  customSetState: AddCorrectionProps | SetSummaryProps | SetTranslationProps;
 }
 
 export type FromText = string;
@@ -183,3 +183,31 @@ interface PlagiarismCheckerTextareaWrapperProps {
   textareaContent: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
 }
+//TRASLATE
+export type FromText = string;
+export type TranslatedText = string;
+export type detectedLanguage = null | Language;
+export type FromLanguageProps = Languages | typeof AUTO_LANGUAGE;
+export type TranslationProps = {
+  translatedText: TranslatedText;
+  detectedLanguage: detectedLanguage;
+};
+export interface TranslatorProps {
+  fromLanguage: FromLanguageProps;
+  toLanguage: Languages;
+  fromText: FromText;
+  translation: TranslationProps;
+}
+export interface LanguageSectionProps {
+  fromLanguage?: FromLanguageProps;
+  onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  languageSelectorValue: FromLanguageProps;
+  options: Languages[];
+  textareaValue: string;
+  textareaOnchange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  translation: TranslationProps;
+  loading?: boolean;
+  setFromText?: (text: FromText) => void;
+}
+export interface OriginTranslator
+  extends Omit<TranslatorProps, "translation"> {}
