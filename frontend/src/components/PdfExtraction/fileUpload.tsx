@@ -1,30 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faListCheck,
-  faSpellCheck,
-  faBook,
-} from "@fortawesome/free-solid-svg-icons";
 import { InboxOutlined } from "@ant-design/icons";
-import {
-  Upload,
-  Typography,
-  Card,
-  Skeleton,
-  FloatButton,
-  Tooltip,
-  Button,
-} from "antd";
+import { Upload, Skeleton, FloatButton, Layout } from "antd";
 import axios from "axios";
 import { type FC } from "react";
-const { Title, Paragraph } = Typography;
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
-import Link from "next/link";
-import { useBoundStore } from "@/zustand/useBoundStore";
-
-interface SetTextButtonProps {
-  additionalSetState?: (text: string) => void;
-}
+import { extractFront } from "./extractFront";
+import { extractBody } from "./extractBody";
+import { extractBack } from "./extractBack";
+import Aside from "./Aside";
+const { Content } = Layout;
 
 const FileUpload: FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -32,10 +16,11 @@ const FileUpload: FC = () => {
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>(null);
   let n = 0;
-  const body = res ? extractBody(res) : [];
-  const front = res ? extractFront(res) : [];
+  const body = res ? extractBody(res, loading) : [];
+  const front = res ? extractFront(res, loading) : [];
+  const back = res ? extractBack(res, loading) : [];
   const mergedArray = [...front, ...body];
-  const { setValue } = useBoundStore();
+  // const { setValue } = useBoundStore();
 
   useEffect(() => {
     const storedUploadResult = localStorage.getItem("uploadResult");
@@ -43,298 +28,6 @@ const FileUpload: FC = () => {
       setRes(JSON.parse(storedUploadResult));
     }
   }, []);
-
-  function extractFront(obj: any) {
-    const components: JSX.Element[] = [];
-
-    function recurse(current: any, property: any) {
-      // console.log("LOG1 => current : " + current + "  property : " + property);
-      if (Array.isArray(current)) {
-        for (let i = 0; i < current.length; i++) {
-          recurse(current[i], property);
-        }
-      } else if (typeof current === "object") {
-        for (const key in current) {
-          if (key !== "$" && key !== "body" && key !== "back") {
-            if (current.hasOwnProperty(key)) {
-              if (property === "abstract") {
-                n++;
-
-                const title = (
-                  <Card
-                    key={n}
-                    className=" bg-white dark:bg-gray-1 "
-                    style={{ marginTop: 16 }}
-                    loading={loading}
-                  >
-                    <Skeleton loading={loading} active>
-                      <Typography.Title
-                        className="dark:text-white "
-                        editable
-                        level={4}
-                        style={{ margin: 0 }}
-                      >
-                        Abstract
-                      </Typography.Title>
-                    </Skeleton>
-                  </Card>
-                );
-                components.push(title);
-              }
-              recurse(current[key], key);
-            }
-          }
-        }
-      } else {
-        // console.log(
-        //   "LOG1 => current : " + current + "  property : " + property
-        // );
-        if (property === "article-title") {
-          n++;
-
-          const bigTitle = (
-            <Title
-              className=" text-text-gray dark:text-white"
-              style={{ marginTop: 30 }}
-              level={2}
-            >
-              <Skeleton loading={loading} active>
-                {current}
-              </Skeleton>
-            </Title>
-          );
-          components.push(bigTitle);
-        }
-
-        if (property === "p") {
-          n++;
-
-          const p = (
-            <Card
-              className=" bg-white dark:bg-gray-1 "
-              style={{ marginTop: 16 }}
-              actions={[
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/text-summarizer",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="summarize">
-                    <Button>
-                      <FontAwesomeIcon icon={faBook} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/grammar-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check grammar">
-                    <Button>
-                      <FontAwesomeIcon icon={faSpellCheck} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/vocabulary-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check vocabulary">
-                    <Button>
-                      <FontAwesomeIcon icon={faBook} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/plagiarism-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check plagiarism">
-                    <Button>
-                      <FontAwesomeIcon icon={faListCheck} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-              ]}
-            >
-              <Skeleton loading={loading} active>
-                <Paragraph
-                  className=" text-text-gray dark:text-white"
-                  editable={{
-                    autoSize: { maxRows: 5, minRows: 3 },
-                  }}
-                >
-                  {current}
-                </Paragraph>
-              </Skeleton>
-            </Card>
-          );
-          components.push(p);
-        }
-      }
-    }
-
-    recurse(obj, "");
-
-    return components;
-  }
-
-  function extractBody(obj: any) {
-    const components: JSX.Element[] = [];
-
-    function recurse(current: any, property: any) {
-      if (Array.isArray(current)) {
-        // console.log(
-        //   "LOG1 => current : " + current + "  property : " + property
-        // );
-
-        for (let i = 0; i < current.length; i++) {
-          recurse(current[i], property);
-        }
-      } else if (typeof current === "object") {
-        for (const key in current) {
-          if (
-            key !== "xref" &&
-            key !== "$" &&
-            key !== "front" &&
-            key !== "back"
-          ) {
-            if (current.hasOwnProperty(key)) {
-              recurse(current[key], key);
-            }
-          }
-        }
-      } else {
-        if (property === "title") {
-          if (current === "-") current = "Abstract";
-          const title = (
-            <Card
-              className=" bg-white dark:bg-gray-1 "
-              style={{ marginTop: 16 }}
-              loading={loading}
-            >
-              <Typography.Title
-                className=" text-text-gray dark:text-white"
-                editable
-                level={4}
-                style={{ margin: 0 }}
-              >
-                {current}
-              </Typography.Title>
-            </Card>
-          );
-          components.push(title);
-        }
-
-        if (property === "_" || property === "p") {
-          n++;
-          const p = (
-            <Card
-              className=" bg-white dark:bg-gray-1 "
-              style={{ marginTop: 16 }}
-              actions={[
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/text-summarizer",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="summarize">
-                    <Button>
-                      <FontAwesomeIcon icon={faBook} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/grammar-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check grammar">
-                    <Button>
-                      <FontAwesomeIcon icon={faSpellCheck} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/vocabulary-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check vocabulary ">
-                    <Button>
-                      <FontAwesomeIcon icon={faBook} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-                <Link
-                  key={n}
-                  href={{
-                    pathname: "/plagiarism-checker",
-                    query: {
-                      data: current,
-                    },
-                  }}
-                >
-                  <Tooltip title="check plagiarism">
-                    <Button>
-                      <FontAwesomeIcon icon={faListCheck} />
-                    </Button>
-                  </Tooltip>
-                </Link>,
-              ]}
-            >
-              <Skeleton loading={loading}>
-                <Paragraph
-                  className=" text-text-gray dark:text-white"
-                  editable={{
-                    autoSize: { maxRows: 5, minRows: 3 },
-                  }}
-                >
-                  {current}
-                </Paragraph>
-              </Skeleton>
-            </Card>
-          );
-          components.push(p);
-        }
-      }
-    }
-
-    recurse(obj, "");
-
-    return components;
-  }
 
   const props: UploadProps = {
     onRemove: (file) => {
@@ -360,6 +53,10 @@ const FileUpload: FC = () => {
           "uploadResult",
           JSON.stringify(response.data.result)
         );
+        // const formattedReferences = extractReferences(jsonData);
+
+        // Use the formatted references
+        // console.log(formattedReferences);
       } catch (error) {
         console.error("Error uploading the file:", error);
       }
@@ -385,14 +82,40 @@ const FileUpload: FC = () => {
           uploading company data or other banned files.
         </p>
       </Dragger>
-
-      {res &&
-        mergedArray.map((component, index) => (
-          <Fragment key={index}>{component}</Fragment>
-        ))}
-      <>{loading ? <Skeleton style={{ marginTop: 30 }} active /> : <></>}</>
-
-      <FloatButton.BackTop />
+      <Layout hasSider>
+        <Content style={{ margin: "24px 5px 0", overflow: "initial" }}>
+          <div
+            style={{
+              padding: 24,
+              background: "white",
+            }}
+          >
+            {res &&
+              mergedArray.map((component, index) => (
+                <Fragment key={index}>{component}</Fragment>
+              ))}
+            <>
+              {loading ? <Skeleton style={{ marginTop: 30 }} active /> : <></>}
+            </>
+          </div>
+        </Content>
+        {back.length > 0 ? (
+          <div
+            style={{
+              margin: "24px 5px 0",
+              overflow: "initial",
+              position: "sticky",
+              display: "flex",
+              zIndex: 1,
+            }}
+          >
+            <Aside res={back} />
+          </div>
+        ) : (
+          <p>hhhhhhhhhhh</p>
+        )}
+        <FloatButton.BackTop />
+      </Layout>
     </>
   );
 };
