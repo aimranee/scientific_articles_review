@@ -18,9 +18,9 @@ export enum HeaderDescription {
 export const AUTO_LANGUAGE = "Auto";
 
 export enum Languages {
-  ENGLISH = "English",
+  ENGLISH = "en-GB",
   SPANISH = "Spanish",
-  FRENCH = "French",
+  FRENCH = "fr",
   GERMAN = "German",
   ITALIAN = "Italian",
   PORTUGUESE = "Portuguese",

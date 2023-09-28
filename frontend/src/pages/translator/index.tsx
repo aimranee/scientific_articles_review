@@ -1,4 +1,6 @@
-import { type FC } from "react";
+import { useState, type FC, useEffect } from "react";
+import axios from "axios";
+
 import {
   AUTO_LANGUAGE,
   HeaderDescription,
@@ -15,7 +17,7 @@ import Navbar from "@/components/Navbar";
 import { useTranslator } from "@/hooks/useTranslator";
 import { useCleaner } from "@/hooks/useCleaner";
 
-const Translator: FC = () => {
+const Translatorc: FC = () => {
   useCleaner();
   const {
     fromLanguage,
@@ -27,9 +29,44 @@ const Translator: FC = () => {
     fromText,
     setFromText,
     switchLanguages,
-    loading,
+    // loading,
   } = useTranslator();
+
   const LanguagesList = Object.values(Languages);
+  //start deepl section
+  const [translatedText, setTranslatedText] = useState<string | "nothing">(
+    "nothing"
+  );
+  const [sourceLang, setSourceLang] = useState<string>(""); // Initialize with your default source language
+  const [targetLang, setTargetLang] = useState<string>(""); // Initialize with your default target language
+  const [text, setText] = useState<string>("");
+
+  useEffect(() => {
+    // Define an async function to fetch the translation
+  }, []);
+
+  // console.log("text" + fromText + "to" + translation.translatedText);
+
+  // const handleTranslate = async () => {
+  //   try {
+  //     const response = await axios.post("/translator", {
+  //       sourceLang,
+  //       targetLang,
+  //       text,
+  //     });
+
+  //     if (response.status === 200) {
+  //       // Assuming your API response has a 'result' field containing the translation
+  //       setTranslatedText(response.data.result.text);
+  //     } else {
+  //       console.error("Error:", response.statusText);
+  //       // Handle error as needed
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     // Handle error as needed
+  //   }
+  // };
 
   return (
     <div className="flex flex-wrap gap-y-10 md:flex-nowrap bg-white-1 dark:bg-black text-white w-full h-max min-h-screen pb-5 md:pt-0">
@@ -73,9 +110,9 @@ const Translator: FC = () => {
                 onSelectChange={handleToLanguage}
                 languageSelectorValue={toLanguage}
                 options={LanguagesList}
-                textareaValue={translation?.translatedText}
+                textareaValue={translatedText}
                 translation={translation}
-                loading={loading}
+                // loading={loading}
               />
             </div>
           </TextareaSection>
@@ -85,4 +122,4 @@ const Translator: FC = () => {
   );
 };
 
-export default Translator;
+export default Translatorc;
