@@ -8,7 +8,8 @@ const xml2js = require("xml2js");
 const app = express();
 const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
-
+const deepl = require("deepl-node");
+require("dotenv").config();
 app.use(
   bodyParser.text(),
   cors({
@@ -188,8 +189,38 @@ function cleanUpText(obj) {
   }
   return obj;
 }
+//section translator
 
-const PORT = process.env.PORT || 8080;
+const translator = new deepl.Translator(process.env.DEEPL_AUTH_KEY);
+
+app.post("/translator", async (req, res) => {
+  const text = req.body.fromText;
+  const sourceLang = req.body.fromLanguage;
+  console.log("heere " + sourceLang);
+  const targetLang = req.body.toLanguage;
+
+  try {
+    // (async () => {
+    // const sourceLang = (deepl.TargetLanguageCode = "fr");
+    // const targetLang = (deepl.TargetLanguageCode = "en-GB");
+    const result = await translator.translateText(text, sourceLang, targetLang);
+
+    return res.status(200).json({
+      result: result,
+      msg: "File uploaded and processed",
+    });
+    // console.log(result);
+    // console.log(translator.translateText); // Bonjour, le monde !
+    // Bonjour, le monde !
+  } catch (error) {
+    console.error("Error while checking plagiarism:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while checking plagiarism" });
+  }
+});
+
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
