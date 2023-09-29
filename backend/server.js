@@ -8,13 +8,23 @@ const xml2js = require("xml2js");
 const app = express();
 const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
-const deepl = require("deepl-node");
-require("dotenv").config();
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://paper-checker-alpha.vercel.app",
+];
+
 app.use(
   bodyParser.text(),
   cors({
-    origin: "http://localhost:3000", // Change this to your frontend's URL
-    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    // origin: "http://localhost:3000", // Change this to your frontend's URL
+    // credentials: true,
   })
 );
 
