@@ -1,45 +1,48 @@
-import { AUTO_LANGUAGE, Languages } from "@/enums.d"
-import { FromLanguageProps, TranslatorProps, FromText, TranslationProps } from "@/interfaces.d"
-import { StateCreator } from "zustand"
+import {  Languages } from "@/enums.d";
+import {
+  FromLanguageProps,
+  TranslatorProps,
+  FromText,
+  TranslatedText,
+} from "@/interfaces.d";
+import { StateCreator } from "zustand";
 
 interface TranslatorMethodsProps {
-  setFromLanguage: (language: FromLanguageProps) => void
-  setToLanguage: (language: Languages) => void
-  setFromText: (text: FromText) => void
-  setTranslation: (text: TranslationProps) => void
-  switchLanguages: () => void
-  clearTranslation: () => void
+  setFromLanguage: (language: FromLanguageProps) => void;
+  setToLanguage: (language: Languages) => void;
+  setFromText: (text: FromText) => void;
+  setTranslatedText: (text: TranslatedText) => void;
+  switchLanguages: () => void;
+  clearTranslation: () => void;
 }
 
-export interface TranslatorSlice extends TranslatorProps, TranslatorMethodsProps {}
+export interface TranslatorSlice
+  extends TranslatorProps,
+    TranslatorMethodsProps {}
 
 const initialState = {
   fromLanguage: Languages.ENGLISH,
-  toLanguage: Languages.SPANISH,
+  toLanguage: Languages.FRENCH,
   fromText: "",
-  translation: {
-    translatedText: "",
-    detectedLanguage: null
-  }
-}
+  translatedText: "",
+};
 
-export const createTranslatorSlice: StateCreator<TranslatorSlice> = set => ({
+export const createTranslatorSlice: StateCreator<TranslatorSlice> = (set) => ({
   ...initialState,
-  setFromLanguage: language => set({ fromLanguage: language }),
-  setToLanguage: language => set({ toLanguage: language }),
-  setFromText: text => set({ fromText: text }),
-  setTranslation: translation => set({ translation: translation }),
+  setFromLanguage: (language) => set({ fromLanguage: language }),
+  setToLanguage: (language) => set({ toLanguage: language }),
+  setFromText: (text) => set({ fromText: text }),
+  setTranslatedText: (text) => set({ translatedText: text }),
   switchLanguages: () => {
-    return set(state => {
-      if (state.fromLanguage === AUTO_LANGUAGE) return state
+    return set((state) => {
       const newState: TranslatorProps = {
         fromLanguage: state.toLanguage,
         toLanguage: state.fromLanguage,
-        fromText: state.translation.translatedText,
-        translation: { ...state.translation, translatedText: state.fromText }
-      }
-      return newState
-    })
+        fromText: state.translatedText,
+        translatedText: state.fromText,
+      };
+      return newState;
+    });
   },
-  clearTranslation: () => set(initialState)
-})
+  clearTranslation: () => set(initialState),
+});

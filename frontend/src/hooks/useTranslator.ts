@@ -1,15 +1,8 @@
 import { useEffect } from "react";
 import { useBoundStore } from "@/zustand/useBoundStore";
-import { useChatGPT } from "./useChatGPT";
 import axios from "axios";
-// import * as deep:l from "deepl-node";
-
-import { Languages, ResponseProperties } from "@/enums.d";
-import {
-  createSystemMessage,
-  createUserMessage,
-} from "@/prompts/translatorPrompt";
-import type { TranslationProps } from "@/interfaces";
+import { Languages } from "@/enums.d";
+import { getLanguageByName } from "@/zustand/getLanguageByName";
 
 export const useTranslator = () => {
   const {
@@ -19,58 +12,31 @@ export const useTranslator = () => {
     setFromText,
     toLanguage,
     setToLanguage,
-    translation,
-    setTranslation,
+    translatedText,
+    setTranslatedText,
     switchLanguages,
+    loading,
   } = useBoundStore();
-  // const { addChatGPTMessage, loading } = useChatGPT({
-  //   initialPrompt: createSystemMessage(),
-  //   customProperty: ResponseProperties.TRANSLATION,
-  //   customSetState: setTranslation
-  // })
-  import * as DeepL from "unofficial-deepl-client";
-  const token = process.env.DEEPL_AUTH_KEY ?? "";
-  const deepL = new DeepL.WebClient(token);
-  const translator = new DeepL.Translator(`${process.env.DEEPL_AUTH_KEY}`);
 
   useEffect(() => {
-    console.log("test1");
-
     if (fromText?.length <= 1) return;
+    const frLng = getLanguageByName(fromLanguage);
+    const toLng = getLanguageByName(toLanguage);
     const timeout = setTimeout(async () => {
-      console.log("test2");
-
       try {
-        const response = await translator.translateText(
-          fromText,
-          fromLanguage,
-          toLanguage
-        );
-        console.log(response);
-        console.log(translator.translateText);
+        const response = await axios.post("http://localhost:8080/translate", {
+          text: fromText,
+          source_lang: frLng,
+          target_lang: toLng,
+        });
 
-        // if (response.status === 200) {
-        //   // Assuming your API response has a 'result' field containing the translation
-        //   console.log("ressss" + response.data.msg);
-        // } else {
-        //   console.error("Error:", response.statusText);
-        //   // Handle error as needed
-        // }
+        if (response.status === 200) {
+          const data = response.data;
+          setTranslatedText(data.result);
+        }
       } catch (error) {
-        console.error("Error:", error);
-        // Handle error as needed
+        console.error(error);
       }
-      console.log("test3");
-      //
-      const translatedTextCleared: TranslationProps = {
-        ...translation,
-        translatedText: "",
-      };
-      setTranslation(translatedTextCleared);
-      // setTranslation(response.data.result);
-
-      // const userMessage = createUserMessage({ fromText, fromLanguage, toLanguage })
-      // addChatGPTMessage(userMessage)
     }, 1000);
     return () => {
       clearTimeout(timeout);
@@ -97,10 +63,10 @@ export const useTranslator = () => {
     toLanguage,
     handleToLanguage,
     onFromLanguageChange,
-    translation,
+    translatedText,
     fromText,
     setFromText,
     switchLanguages,
-    // loading,
+    loading,
   };
 };

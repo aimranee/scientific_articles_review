@@ -8,10 +8,11 @@ const xml2js = require("xml2js");
 const app = express();
 const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
-const deepl = require("deepl-node");
 require("dotenv").config();
+
 app.use(
   bodyParser.text(),
+  bodyParser.json(),
   cors({
     origin: "http://localhost:3000", // Change this to your frontend's URL
     credentials: true,
@@ -189,34 +190,36 @@ function cleanUpText(obj) {
   }
   return obj;
 }
+
 //section translator
 
-const translator = new deepl.Translator(process.env.DEEPL_AUTH_KEY);
-
-app.post("/translator", async (req, res) => {
-  const text = req.body.fromText;
-  const sourceLang = req.body.fromLanguage;
-  console.log("heere " + sourceLang);
-  const targetLang = req.body.toLanguage;
-
+app.post("/translate", async (req, res) => {
   try {
-    // (async () => {
-    // const sourceLang = (deepl.TargetLanguageCode = "fr");
-    // const targetLang = (deepl.TargetLanguageCode = "en-GB");
-    const result = await translator.translateText(text, sourceLang, targetLang);
+    const { text, source_lang, target_lang } = req.body;
+    console.log(req.body);
+    const apiKey = process.env.DEEPL_AUTH_KEY; // Replace with your DeepL API key
+    const response = await axios.post(
+      "https://api-free.deepl.com/v2/translate",
+      {
+        text: [text],
+        source_lang: source_lang,
+        target_lang: target_lang,
+      },
+      {
+        headers: {
+          Authorization: `DeepL-Auth-Key ${apiKey}`,
+        },
+      }
+    );
+
+    console.log("==>  " + response.data.translations[0].text);
 
     return res.status(200).json({
-      result: result,
+      result: response.data.translations[0].text,
       msg: "File uploaded and processed",
     });
-    // console.log(result);
-    // console.log(translator.translateText); // Bonjour, le monde !
-    // Bonjour, le monde !
   } catch (error) {
-    console.error("Error while checking plagiarism:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while checking plagiarism" });
+    res.status(500).json({ error: "Translation failed" });
   }
 });
 

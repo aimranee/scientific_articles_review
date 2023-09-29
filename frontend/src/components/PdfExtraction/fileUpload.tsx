@@ -99,7 +99,7 @@ const FileUpload: FC = () => {
             </>
           </div>
         </Content>
-        {back.length > 0 ? (
+        {back && (
           <div
             style={{
               margin: "24px 5px 0",
@@ -111,8 +111,6 @@ const FileUpload: FC = () => {
           >
             <Aside res={back} />
           </div>
-        ) : (
-          <p>hhhhhhhhhhh</p>
         )}
         <FloatButton.BackTop />
       </Layout>
