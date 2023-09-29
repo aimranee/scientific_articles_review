@@ -39,7 +39,7 @@ const PlagiarismChecker: FC = () => {
 
     try {
       const response = await axios.post(
-        "https://precious-skirt-lion.cyclic.cloud/plagiarism-check",
+        "https://relieved-gold-frog.cyclic.cloudplagiarism-check",
         textareaContent,
         {
           headers: {
