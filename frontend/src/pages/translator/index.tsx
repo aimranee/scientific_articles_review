@@ -1,6 +1,4 @@
 import { useState, type FC, useEffect } from "react";
-import axios from "axios";
-
 import {
   AUTO_LANGUAGE,
   HeaderDescription,
@@ -8,7 +6,6 @@ import {
   Languages,
 } from "@/enums.d";
 import TranslatorInfo from "@/../public/TranslatorInfo.json";
-
 import FromLanguage from "@/components/Translator/FromLanguage";
 import ToLanguage from "@/components/Translator/ToLanguage";
 import TextareaSection from "@/components/TextareaSection";
@@ -37,9 +34,9 @@ const Translatorc: FC = () => {
   const [translatedText, setTranslatedText] = useState<string | "nothing">(
     "nothing"
   );
-  const [sourceLang, setSourceLang] = useState<string>(""); // Initialize with your default source language
-  const [targetLang, setTargetLang] = useState<string>(""); // Initialize with your default target language
-  const [text, setText] = useState<string>("");
+  // const [sourceLang, setSourceLang] = useState<string>(""); // Initialize with your default source language
+  // const [targetLang, setTargetLang] = useState<string>(""); // Initialize with your default target language
+  // const [text, setText] = useState<string>("");
 
   useEffect(() => {
     // Define an async function to fetch the translation

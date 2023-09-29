@@ -1,7 +1,6 @@
 import Select from "../Select";
 import { type FC } from "react";
 import { AUTO_LANGUAGE, Languages } from "@/enums.d";
-// import BottomArrow from "../../../public/bottom-arrow-icon.svg";
 import IconWrapper from "../IconWrapper";
 
 interface LanguageSelectorProps {
@@ -33,10 +32,6 @@ const LanguageSelector: FC<LanguageSelectorProps> = ({
         <Select.Option options={options} />
       </Select>
       <button className="pointer-events-none absolute top-0 right-0 pr-5 h-[40px] flex items-center">
-        {/* <IconWrapper
-          icon={<BottomArrow className="w-7 h-7 !fill-orange-500" />}
-          className="!w-7"
-        /> */}
       </button>
       {children}
     </div>
