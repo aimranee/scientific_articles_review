@@ -45,7 +45,7 @@ const FileUpload: FC = () => {
 
       try {
         const response = await axios.post(
-          `https://plain-frock-crow.cyclic.cloud/upload`,
+          "https://plain-frock-crow.cyclic.cloud/upload",
           formData
         );
         console.log(process.env.PATH_BACK + "backen");
