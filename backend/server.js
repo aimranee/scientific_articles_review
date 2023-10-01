@@ -196,7 +196,6 @@ function cleanUpText(obj) {
 app.post("/translate", async (req, res) => {
   try {
     const { text, source_lang, target_lang } = req.body;
-    console.log(req.body);
     const apiKey = process.env.DEEPL_AUTH_KEY; // Replace with your DeepL API key
     const response = await axios.post(
       "https://api-free.deepl.com/v2/translate",
@@ -211,8 +210,6 @@ app.post("/translate", async (req, res) => {
         },
       }
     );
-
-    console.log("==>  " + response.data.translations[0].text);
 
     return res.status(200).json({
       result: response.data.translations[0].text,
