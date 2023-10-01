@@ -45,7 +45,7 @@ const FileUpload: FC = () => {
 
       try {
         const response = await axios.post(
-          "https://precious-skirt-lion.cyclic.cloud/upload",
+          `${process.env.PATH_BACK}/upload`,
           formData
         );
         setRes(response.data.result);
