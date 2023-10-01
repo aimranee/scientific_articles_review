@@ -1,14 +1,14 @@
 import Select from "../Select";
 import { type FC } from "react";
-import { AUTO_LANGUAGE, Languages } from "@/enums.d";
+import { Languages } from "@/enums.d";
 import IconWrapper from "../IconWrapper";
 
 interface LanguageSelectorProps {
   onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   selectName: string;
   options: Languages[];
-  defaultOption?: Languages[] | (typeof AUTO_LANGUAGE)[];
-  value: Languages | typeof AUTO_LANGUAGE;
+  defaultOption?: Languages[];
+  value: Languages;
   children?: React.ReactNode;
 }
 
@@ -31,8 +31,7 @@ const LanguageSelector: FC<LanguageSelectorProps> = ({
         {defaultOption && <Select.Option options={defaultOption} />}
         <Select.Option options={options} />
       </Select>
-      <button className="pointer-events-none absolute top-0 right-0 pr-5 h-[40px] flex items-center">
-      </button>
+      <button className="pointer-events-none absolute top-0 right-0 pr-5 h-[40px] flex items-center"></button>
       {children}
     </div>
   );
