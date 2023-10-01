@@ -1,10 +1,10 @@
-import { AUTO_LANGUAGE, Languages } from "@/enums";
+import { Languages } from "@/enums";
 import { useBoundStore } from "@/zustand/useBoundStore";
 import { type FC } from "react";
 
 interface SelectProps {
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
-  value: Languages | typeof AUTO_LANGUAGE;
+  value: Languages;
   defaultValue?: string;
   children: React.ReactNode;
   className?: string;
@@ -13,7 +13,7 @@ interface SelectProps {
 }
 
 interface OptionProps {
-  options: Languages[] | (typeof AUTO_LANGUAGE)[];
+  options: Languages[];
   className?: string;
 }
 
