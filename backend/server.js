@@ -10,7 +10,6 @@ const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
 require("dotenv").config();
 
-
 const allowedOrigins = [
   "http://localhost:3000",
   "https://paper-checker-alpha.vercel.app",
@@ -20,13 +19,7 @@ app.use(
   bodyParser.text(),
   bodyParser.json(),
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: allowedOrigins,
     // origin: "http://localhost:3000", // Change this to your frontend's URL
     // credentials: true,
   })
