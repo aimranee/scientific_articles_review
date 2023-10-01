@@ -7,6 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "config": {
+  "development": {
+    "corsOrigin": "http://localhost:3000"
+  },
+  "production": {
+    "corsOrigin": "https://paper-checker-alpha.vercel.app"
+  }},
   "author": "",
   "license": "ISC",
   "dependencies": {
