@@ -7,7 +7,7 @@ import { CorrectionsProps } from "@/interfaces";
 import Textarea from "../Textarea";
 import isDesktopView from "@/utils/isDesktopView";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 interface GrammarCheckerTextareaProps {
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;

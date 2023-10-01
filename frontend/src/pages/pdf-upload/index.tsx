@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { type FC } from "react";
-import GrammarCheckerInfo from "@/../public/GrammarCheckerInfo.json";
+import UploadFileInfo from "@/../public/UploadFileInfo.json";
 import TextareaSection from "@/components/TextareaSection";
 import Navbar from "@/components/Navbar";
 import { HeaderDescription, HeaderTitle } from "@/enums.d";
 import FileUpload from "@/components/PdfExtraction/fileUpload";
 import { Layout } from "antd";
-import Aside from "@/components/PdfExtraction/Aside";
 
 const PdfUpload: FC = () => {
   return (
@@ -16,13 +15,13 @@ const PdfUpload: FC = () => {
         <div className="flex flex-col w-full">
           <Navbar />
           <Layout hasSider>
-            <main className="w-full h-max md:h-full flex justify-center  dark:bg-black text-white  items-center px-5 relative">
+            <main className="w-full h-max md:h-full flex justify-center dark:bg-black text-white  items-center px-5 relative">
               <TextareaSection>
                 <TextareaSection.Header
                   title={HeaderTitle.FILE_UPLOAD}
                   description={HeaderDescription.FILE_UPLOAD}
                   className="bg-yellow-500"
-                  content={GrammarCheckerInfo}
+                  content={UploadFileInfo}
                 />
 
                 <FileUpload />

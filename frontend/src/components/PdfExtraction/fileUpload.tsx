@@ -53,10 +53,6 @@ const FileUpload: FC = () => {
           "uploadResult",
           JSON.stringify(response.data.result)
         );
-        // const formattedReferences = extractReferences(jsonData);
-
-        // Use the formatted references
-        // console.log(formattedReferences);
       } catch (error) {
         console.error("Error uploading the file:", error);
       }
@@ -83,12 +79,16 @@ const FileUpload: FC = () => {
         </p>
       </Dragger>
       <Layout hasSider>
-        <Content style={{ margin: "24px 5px 0", overflow: "initial" }}>
+        <Content
+          style={{ margin: "24px 5px 0", overflow: "initial" }}
+          className=" bg-white dark:bg-gray-1"
+        >
           <div
             style={{
               padding: 24,
               background: "white",
             }}
+            className="bg-white dark:bg-gray-1"
           >
             {res &&
               mergedArray.map((component, index) => (
@@ -99,7 +99,7 @@ const FileUpload: FC = () => {
             </>
           </div>
         </Content>
-        {back.length > 0 ? (
+        {back && (
           <div
             style={{
               margin: "24px 5px 0",
@@ -111,8 +111,6 @@ const FileUpload: FC = () => {
           >
             <Aside res={back} />
           </div>
-        ) : (
-          <p>hhhhhhhhhhh</p>
         )}
         <FloatButton.BackTop />
       </Layout>

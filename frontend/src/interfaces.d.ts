@@ -186,28 +186,24 @@ interface PlagiarismCheckerTextareaWrapperProps {
 //TRASLATE
 export type FromText = string;
 export type TranslatedText = string;
-export type detectedLanguage = null | Language;
-export type FromLanguageProps = Languages | typeof AUTO_LANGUAGE;
-export type TranslationProps = {
-  translatedText: TranslatedText;
-  detectedLanguage: detectedLanguage;
-};
+export type FromLanguageProps = Languages;
+export type TextareaValue = string;
 export interface TranslatorProps {
   fromLanguage: FromLanguageProps;
   toLanguage: Languages;
   fromText: FromText;
-  translation: TranslationProps;
+  translatedText: TranslatedText;
 }
 export interface LanguageSectionProps {
   fromLanguage?: FromLanguageProps;
   onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   languageSelectorValue: FromLanguageProps;
   options: Languages[];
-  textareaValue: string;
   textareaOnchange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  translation: TranslationProps;
+  translatedText: TranslatedText;
   loading?: boolean;
   setFromText?: (text: FromText) => void;
+  textareaValue: TextareaValue;
 }
 export interface OriginTranslator
-  extends Omit<TranslatorProps, "translation"> {}
+  extends Omit<TranslatorProps, "translatedText"> {}

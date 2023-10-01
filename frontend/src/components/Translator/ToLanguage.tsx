@@ -11,7 +11,7 @@ const ToLanguage: FC<Omit<LanguageSectionProps, "textareaOnchange">> = ({
   languageSelectorValue,
   options,
   textareaValue,
-  loading
+  loading,
 }) => {
   return (
     <TextareaWrapper>
@@ -35,7 +35,7 @@ const ToLanguage: FC<Omit<LanguageSectionProps, "textareaOnchange">> = ({
         <CopyButton text={textareaValue} />
       </TextareaFooter>
     </TextareaWrapper>
-  )
-}
+  );
+};
 
 export default ToLanguage

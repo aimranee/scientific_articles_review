@@ -34,6 +34,7 @@ const GrammarChecker: FC = () => {
       </div>
     </div>
   );
+  
 };
 
 export default GrammarChecker;
