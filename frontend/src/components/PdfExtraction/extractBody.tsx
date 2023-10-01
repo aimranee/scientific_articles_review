@@ -4,6 +4,7 @@ import {
   faListCheck,
   faSpellCheck,
   faBook,
+  faLanguage
 } from "@fortawesome/free-solid-svg-icons";
 import { Typography, Card, Skeleton, Tooltip, Button } from "antd";
 const { Paragraph } = Typography;
@@ -118,6 +119,21 @@ export function extractBody(obj: any, loading: boolean) {
                 <Tooltip title="check plagiarism">
                   <Button>
                     <FontAwesomeIcon icon={faListCheck} />
+                  </Button>
+                </Tooltip>
+              </Link>,
+              <Link
+                key={n}
+                href={{
+                  pathname: "/translator",
+                  query: {
+                    data: current,
+                  },
+                }}
+              >
+                <Tooltip title="Translation">
+                  <Button>
+                    <FontAwesomeIcon icon={faLanguage} />
                   </Button>
                 </Tooltip>
               </Link>,

@@ -4,6 +4,7 @@ import {
   faListCheck,
   faSpellCheck,
   faBook,
+  faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
 import { Typography, Card, Skeleton, Tooltip, Button } from "antd";
 const { Title, Paragraph } = Typography;
@@ -52,13 +53,12 @@ export function extractFront(obj: any, loading: boolean) {
         }
       }
     } else {
-
       if (property === "article-title") {
         n++;
 
         const bigTitle = (
           <Title
-            className=" text-text-gray dark:text-white"
+            className=" text-text-gray dark:text-white bg-white dark:bg-gray-1"
             style={{ marginTop: 30 }}
             level={2}
           >
@@ -135,6 +135,21 @@ export function extractFront(obj: any, loading: boolean) {
                 <Tooltip title="check plagiarism">
                   <Button>
                     <FontAwesomeIcon icon={faListCheck} />
+                  </Button>
+                </Tooltip>
+              </Link>,
+              <Link
+                key={n}
+                href={{
+                  pathname: "/translator",
+                  query: {
+                    data: current,
+                  },
+                }}
+              >
+                <Tooltip title="Translation">
+                  <Button>
+                    <FontAwesomeIcon icon={faLanguage} />
                   </Button>
                 </Tooltip>
               </Link>,
