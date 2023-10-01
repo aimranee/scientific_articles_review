@@ -45,9 +45,10 @@ const FileUpload: FC = () => {
 
       try {
         const response = await axios.post(
-          `${process.env.PATH_BACK}/upload`,
+          `https://plain-frock-crow.cyclic.cloud/upload`,
           formData
         );
+        console.log(process.env.PATH_BACK + "backen");
         setRes(response.data.result);
         localStorage.setItem(
           "uploadResult",
