@@ -10,7 +10,10 @@ const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
 require("dotenv").config();
 
-const allowedOrigins = ["http://localhost:3000", `${process.env.PATH_FRONT}`];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://paper-checker-alpha.vercel.app",
+];
 
 app.use(
   bodyParser.text(),
