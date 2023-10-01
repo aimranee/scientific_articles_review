@@ -10,7 +10,7 @@ const NetworkSpeed = require("network-speed"); // ES5
 const testNetworkSpeed = new NetworkSpeed();
 require("dotenv").config();
 
-const allowedOrigins = ["http://localhost:3000", `${process.env.PATH_FRONT}`];
+const allowedOrigins = [`${process.env.PATH_FRONT}`];
 
 app.use(
   bodyParser.text(),
