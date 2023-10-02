@@ -1,7 +1,6 @@
 import Select from "../Select";
 import { type FC } from "react";
 import { Languages } from "@/enums.d";
-import IconWrapper from "../IconWrapper";
 
 interface LanguageSelectorProps {
   onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
