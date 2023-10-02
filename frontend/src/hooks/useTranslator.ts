@@ -24,14 +24,11 @@ export const useTranslator = () => {
     const toLng = getLanguageByName(toLanguage);
     const timeout = setTimeout(async () => {
       try {
-        const response = await axios.post(
-          `${process.env.PATH_BACK}/translate`,
-          {
-            text: fromText,
-            source_lang: frLng,
-            target_lang: toLng,
-          }
-        );
+        const response = await axios.post("http://localhost:8080/translate", {
+          text: fromText,
+          source_lang: frLng,
+          target_lang: toLng,
+        });
 
         if (response.status === 200) {
           const data = response.data;

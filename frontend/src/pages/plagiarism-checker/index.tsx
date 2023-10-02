@@ -39,7 +39,7 @@ const PlagiarismChecker: FC = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.PATH_BACK}/plagiarism-check`,
+        "http://localhost:8080/plagiarism-check",
         textareaContent,
         {
           headers: {

@@ -12,7 +12,7 @@ require("dotenv").config();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://paper-checker-alpha.vercel.app",
+  // "https://paper-checker-alpha.vercel.app",
 ];
 
 app.use(
