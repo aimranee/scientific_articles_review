@@ -15,17 +15,20 @@ const FileUpload: FC = () => {
   const { Dragger } = Upload;
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<any>(null);
-  let n = 0;
   const body = res ? extractBody(res, loading) : [];
   const front = res ? extractFront(res, loading) : [];
   const back = res ? extractBack(res, loading) : [];
   const mergedArray = [...front, ...body];
-  // const { setValue } = useBoundStore();
+  const [fileName, setFileName] = useState<UploadFile>({
+    uid: "123",
+    name: localStorage.getItem("fileName") ?? "defaultName",
+  });
 
   useEffect(() => {
     const storedUploadResult = localStorage.getItem("uploadResult");
     if (storedUploadResult) {
       setRes(JSON.parse(storedUploadResult));
+      setFileList([fileName]);
     }
   }, []);
 
@@ -35,6 +38,9 @@ const FileUpload: FC = () => {
       const newFileList = fileList.slice();
       newFileList.splice(index, 1);
       setFileList(newFileList);
+      localStorage.removeItem("uploadResult");
+      localStorage.removeItem("fileName");
+      setRes(null);
     },
     beforeUpload: async (file) => {
       setFileList([file]);
@@ -48,12 +54,13 @@ const FileUpload: FC = () => {
           "http://localhost:8080/upload",
           formData
         );
-        console.log(process.env.PATH_BACK + "backen");
+        //console.log(process.env.PATH_BACK + "backen");
         setRes(response.data.result);
         localStorage.setItem(
           "uploadResult",
           JSON.stringify(response.data.result)
         );
+        localStorage.setItem("fileName", file.name);
       } catch (error) {
         console.error("Error uploading the file:", error);
       }
